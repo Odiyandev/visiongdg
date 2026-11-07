@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1527">
+<meta name="description" content="Infinite Ground Handling & Basics of Aviation Practice Exam with 230+ randomized questions, instant explanations, category filters, and exam simulation mode.">
+<title>AeroQuest | Ground Handling & Aviation Infinity Exam</title>
+<style>
+:root {
+  --bg: #090e17;
+  --bg-card: #111a2e;
+  --bg-card-subtle: #17233d;
+  --ink: #f0f4f8;
+  --ink-muted: #94a3b8;
+  --ink-dim: #64748b;
+  --accent: #10b981;
+  --accent-light: rgba(16, 185, 129, 0.15);
+  --accent-border: #059669;
+  --amber: #f59e0b;
+  --amber-light: rgba(245, 158, 11, 0.15);
+  --blue: #3b82f6;
+  --blue-light: rgba(59, 130, 246, 0.15);
+  --red: #ef4444;
+  --red-light: rgba(239, 68, 68, 0.15);
+  --line: #1e293b;
+  --line-strong: #334155;
+  --shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 14px 40px;
+  padding: calc(18px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
+}
+
+.wrap {
+  width: 100%;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 4px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10b981, #0284c7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+.brand-text h1 {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.brand-text p {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tool-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+
+.tool-btn:hover {
+  background: var(--bg-card-subtle);
+  color: #fff;
+  border-color: var(--line-strong);
+}
+
+.tool-btn.active {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+/* Control Filter Bar */
+.filter-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.source-pills {
+  display: flex;
+  background: var(--bg);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  gap: 2px;
+  overflow-x: auto;
+}
+
+.pill-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-muted);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.pill-btn.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+.select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 240px;
+}
+
+select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: var(--accent);
+}
+
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-muted);
+  padding: 6px 11px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mode-btn.active {
+  background: var(--bg-card-subtle);
+  color: #fff;
+  border: 1px solid var(--line-strong);
+}
+
+/* Exam Card */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(20px, 4vw, 36px);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.badge-cat {
+  background: var(--blue-light);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.badge-source {
+  background: var(--accent-light);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.card-top-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.q-counter {
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--ink-muted);
+}
+
+.btn-star {
+  background: transparent;
+  border: none;
+  color: var(--ink-dim);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.15s, color 0.15s;
+}
+
+.btn-star:hover {
+  transform: scale(1.15);
+  color: var(--amber);
+}
+
+.btn-star.starred {
+  color: var(--amber);
+}
+
+/* Progress bar */
+.progress-wrap {
+  height: 6px;
+  background: var(--bg);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 10px 0 24px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  border-radius: 99px;
+  transition: width 0.3s ease;
+}
+
+/* Question text */
+.q-title {
+  font-size: clamp(19px, 3.2vw, 24px);
+  line-height: 1.45;
+  font-weight: 750;
+  color: #ffffff;
+  margin-bottom: 24px;
+  letter-spacing: -0.3px;
+}
+
+/* Options */
+.options-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.option-btn {
+  width: 100%;
+  min-height: 56px;
+  background: var(--bg-card-subtle);
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 18px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.45;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: #3b82f6;
+  background: #1e2c4d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.option-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.option-letter {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink-muted);
+  font-size: 13px;
+  font-weight: 800;
+  flex: none;
+  border: 1px solid var(--line);
+}
+
+.option-text {
+  flex: 1;
+}
+
+.option-key {
+  font-size: 11px;
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+  border-radius: 6px;
+  flex: none;
+}
+
+/* Correct / Wrong States */
+.option-btn.correct {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: #e6fffa;
+}
+
+.option-btn.correct .option-letter {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.option-btn.wrong {
+  border-color: var(--red);
+  background: var(--red-light);
+  color: #ffe4e4;
+}
+
+.option-btn.wrong .option-letter {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+
+.option-btn:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+/* Explanation Box */
+.feedback-box {
+  display: none;
+  margin-top: 22px;
+  border-radius: 16px;
+  padding: 18px 20px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  animation: slideDown 0.2s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback-box.show { display: block; }
+
+.feedback-box.good {
+  background: var(--accent-light);
+  border: 1px solid var(--accent-border);
+  color: #d1fae5;
+}
+
+.feedback-box.bad {
+  background: var(--red-light);
+  border: 1px solid var(--red);
+  color: #fee2e2;
+}
+
+.feedback-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.feedback-box.good .feedback-title { color: #34d399; }
+.feedback-box.bad .feedback-title { color: #f87171; }
+
+.feedback-explain {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.action-btn {
+  min-height: 48px;
+  border-radius: 14px;
+  padding: 12px 22px;
+  font-size: 14.5px;
+  font-weight: 750;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+}
+
+.btn-secondary {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+}
+
+.btn-secondary:hover {
+  background: var(--bg);
+  color: #fff;
+  border-color: var(--line-strong);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Stats Footer Strip */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.stat-item {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.stat-val {
+  display: block;
+  font-size: clamp(20px, 3.5vw, 26px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.stat-lbl {
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* Modal Drawer (Stats & Mastery) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  background: var(--bg-card);
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  padding: clamp(20px, 3vw, 32px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: zoomIn 0.2s ease-out;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex: none;
+}
+
+.modal-head h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.btn-close {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  color: #fff;
+  border-color: var(--line-strong);
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mastery-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mastery-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mastery-bar-bg {
+  height: 8px;
+  background: var(--bg);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.mastery-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.bookmarked-item {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bookmarked-item h4 {
+  font-size: 14px;
+  color: #fff;
+}
+
+.bookmarked-item p {
+  font-size: 12.5px;
+  color: var(--accent);
+}
+
+/* Shortcuts footer */
+.shortcuts-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-dim);
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.kbd-badge {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: monospace;
+  color: var(--ink-muted);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  body { padding: 12px 10px 24px; }
+  .card { padding: 18px 16px; border-radius: 18px; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .filter-row { flex-direction: column; align-items: stretch; }
+  .source-pills { overflow-x: auto; }
+  .select-wrap { min-width: 100%; }
+  .option-btn { min-height: 52px; padding: 12px 14px; font-size: 14.5px; }
+  .card-actions { flex-direction: column-reverse; }
+  .card-actions .action-btn { width: 100%; justify-content: center; }
+  .option-key { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <div class="brand-icon">✈</div>
+      <div class="brand-text">
+        <h1>AeroQuest Exam</h1>
+        <p>Ground Handling & Basics of Aviation</p>
+      </div>
+    </div>
+    <div class="header-tools">
+      <button class="tool-btn" id="soundBtn" title="Toggle audio chime">
+        <span id="soundIcon">🔊</span> <span id="soundTxt">Sound ON</span>
+      </button>
+      <button class="tool-btn" id="statsBtn" title="View category breakdown">
+        📊 Mastery
+      </button>
+    </div>
+  </header>
+
+  <!-- Filter Controls -->
+  <div class="filter-bar">
+    <div class="filter-row">
+      <div class="source-pills">
+        <button class="pill-btn active" data-source="ALL">🌐 All Sources (233)</button>
+        <button class="pill-btn" data-source="Ground Handling PPT">📋 PPT Only (176)</button>
+        <button class="pill-btn" data-source="Basics of Aviation">🛩️ Basics Only (57)</button>
+      </div>
+
+      <div class="mode-toggle">
+        <button class="mode-btn active" data-mode="infinite">♾️ Infinite Mode</button>
+        <button class="mode-btn" data-mode="exam">🎯 50-Q Exam</button>
+        <button class="mode-btn" data-mode="bookmarks">⭐ Bookmarks (<span id="bookmarkCount">0</span>)</button>
+      </div>
+    </div>
+
+    <div class="filter-row">
+      <div class="select-wrap">
+        <select id="catSelect">
+          <option value="ALL">All Categories (19 Topics)</option>
+        </select>
+      </div>
+      <button class="tool-btn" id="resetDeckBtn" title="Shuffle remaining deck">
+        🔄 Shuffle / Reset Deck
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Question Card -->
+  <main class="card">
+    <div class="card-top">
+      <div class="badges">
+        <span class="badge badge-cat" id="catBadge">AVIATION BASICS</span>
+        <span class="badge badge-source" id="sourceBadge">GROUND HANDLING PPT</span>
+      </div>
+      <div class="card-top-right">
+        <span class="q-counter" id="qCounter">Question 1</span>
+        <button class="btn-star" id="starBtn" title="Bookmark this question">☆</button>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <h2 class="q-title" id="qTitle">Loading question...</h2>
+
+    <div class="options-grid" id="optionsGrid"></div>
+
+    <div class="feedback-box" id="feedbackBox">
+      <div class="feedback-title" id="fbTitle">✓ Correct!</div>
+      <div class="feedback-explain" id="fbExplain"></div>
+    </div>
+
+    <div class="card-actions">
+      <button class="action-btn btn-secondary" id="skipBtn">
+        ⏭ Skip Question <span class="kbd-badge">[S]</span>
+      </button>
+      <button class="action-btn btn-primary" id="nextBtn" disabled>
+        Next Question → <span class="kbd-badge">[Space]</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- Live Stats Strip -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-val" id="statScore">0</span>
+      <span class="stat-lbl">Correct Answers</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" id="statAccuracy">0%</span>
+      <span class="stat-lbl">Accuracy Rate</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" id="statStreak">🔥 0</span>
+      <span class="stat-lbl">Current Streak</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" id="statBest">🏆 0</span>
+      <span class="stat-lbl">Best Streak</span>
+    </div>
+  </div>
+
+  <div class="shortcuts-footer">
+    <span>Keys: <span class="kbd-badge">1</span>-<span class="kbd-badge">4</span> or <span class="kbd-badge">A</span>-<span class="kbd-badge">D</span> Choose Answer</span>
+    <span><span class="kbd-badge">Space</span> / <span class="kbd-badge">Enter</span> Next</span>
+    <span><span class="kbd-badge">S</span> Skip</span>
+    <span><span class="kbd-badge">B</span> Star</span>
+  </div>
+
+</div>
+
+<!-- Mastery Modal -->
+<div class="modal-overlay" id="masteryModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2>📊 Category Mastery & Bookmarks</h2>
+      <button class="btn-close" id="closeMasteryBtn">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="masteryList"></div>
+      <hr style="border:0; border-top: 1px solid var(--line); margin: 10px 0;">
+      <h3 style="font-size: 16px; color: #fff;">Saved Bookmarks</h3>
+      <div id="bookmarkList" style="display:flex; flex-direction:column; gap:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// RAW QUESTIONS DATASET (233 Verified Questions)
+const BANK = [{"id":1,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"How does the Ground Handling presentation define the term 'aviation'?","o":["The art or science of flying, including aircraft design, manufacturing, maintenance and operations","The engineering of airport taxiways and passenger terminal buildings only","The regulation of marine and air customs across international borders","The commercial marketing of airline ticket reservation systems"],"a":0,"e":"Slide 8 defines aviation as the art or science of flying, encompassing the designing, manufacturing, maintenance, and operations of aircraft."},{"id":2,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"Which two standard industry reference manuals are cited as foundational texts in the presentation?","o":["Airport Handling Manual (AHM) and IATA Ground Operations Manual (IGOM)","ICAO Annex 14 and Boeing Flight Crew Operating Manual","Federal Aviation Regulations (FAR) and World Airline Directory","Airports Council International Safety Code and Montreal Convention"],"a":0,"e":"Slide 4 lists the Airport Handling Manual (AHM) and the IATA Ground Operations Manual (IGOM) as prime references."},{"id":3,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"According to the presentation, what is an airport?","o":["A land aerodrome with extended facilities used for the transportation of passengers, baggage, and cargo","Any runway designated exclusively for emergency and military aircraft landings","A commercial warehouse facility used strictly for air cargo consolidation","A maintenance base where aircraft engines are overhauled"],"a":0,"e":"Slide 9 defines an airport as a land aerodrome with extended facilities used for transporting passengers, baggage, and cargo."},{"id":4,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"Which of the following is explicitly listed as a type of airport in the presentation?","o":["STOL Airports (Short Take-Off and Landing)","Suborbital Spaceports","Floating Marine Seadromes","Rail-Integrated Aerostations"],"a":0,"e":"Slide 10 categorizes airports into Commercial, Cargo, Military, Private, Heliports, and STOL (Short Take-Off and Landing) airports."},{"id":5,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"What defines an 'aircraft' according to the presentation?","o":["Any machine or vehicle capable of flying through the air by gaining support from aerodynamic principles","Any powered vehicle with fixed wings manufactured exclusively for commercial passenger travel","Any flying vessel that operates above 10,000 feet Mean Sea Level","Any transport vehicle carrying more than 19 passengers across airspace"],"a":0,"e":"Slide 11 defines an aircraft as any machine or vehicle capable of flying through the air by gaining support from the air via principles of aerodynamics."},{"id":6,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"Which four civil aircraft manufacturers are specifically highlighted in the presentation?","o":["Boeing (USA), Airbus (Europe), Embraer (Brazil), and Bombardier (Canada)","Lockheed (USA), Dassault (France), Antonov (Ukraine), and Tupolev (Russia)","Cessna (USA), Beechcraft (USA), Saab (Sweden), and ATR (France/Italy)","Gulfstream (USA), Sukhoi (Russia), Pilatus (Switzerland), and De Havilland (UK)"],"a":0,"e":"Slide 12 identifies Boeing (USA), Airbus (Europe), Embraer (Brazil), and Bombardier (Canada) as major civil aircraft manufacturers."},{"id":7,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What is the primary function of the aircraft's fuselage?","o":["Serves as the main body, holds passengers, cargo, and crew, and connects all other components","Produces the thrust necessary for forward acceleration and climb","Generates aerodynamic lift to sustain the aircraft in flight","Houses the primary VHF radio navigation and weather radar antennas"],"a":0,"e":"Slide 13 states the fuselage is the main body that holds passengers, cargo, and crew, connecting all other aircraft parts."},{"id":8,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"How do aircraft wings enable an airplane to stay airborne?","o":["Air flows over and under the wings to generate aerodynamic lift","Jet exhaust is directed beneath the wings to create ground cushion effect","Internal gyroscopes counteract the force of gravity during forward travel","The wings tilt upward to scoop air underneath the aircraft fuselage"],"a":0,"e":"Slide 14 explains that the wing's function is to provide lift as air flows over the wings."},{"id":9,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What is the flight deck or cockpit?","o":["The compartment where pilots control the aircraft, containing flight controls, instruments, and navigation systems","The pressurized section under the passenger floor reserved for high-value cargo","The forward galley compartment where cabin crew manage in-flight food and beverage service","The external equipment bay housing hydraulic pumps and air conditioning packs"],"a":0,"e":"Slide 15 defines the cockpit (flight deck) as where pilots control the aircraft, housing flight controls, instruments, and navigation systems."},{"id":10,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What is the dual role of the landing gear described in the presentation?","o":["Supports the aircraft during takeoff, landing, and ground movement, and absorbs touchdown shocks","Increases aerodynamic drag during high-altitude cruise to stabilize airspeed","Directs bleed air from the jet engines into the cabin air conditioning ducts","Provides emergency buoyancy in case of forced ditching in water"],"a":0,"e":"Slide 16 notes that landing gear supports the aircraft during takeoff, landing, and ground operations, and absorbs landing shock."},{"id":11,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What do the aircraft engines provide according to the presentation?","o":["Thrust (power) to move the aircraft forward","Direct vertical lift during high-speed cruise","Hydraulic pressure without burning any aviation fuel","Cabin pressurization exclusively without bleed air"],"a":0,"e":"Slide 17 describes the function of engines: providing thrust (power) to move the plane forward."},{"id":12,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What is the empennage, and what are its two main structural parts?","o":["The tail assembly; consists of the vertical stabilizer (with rudder) and horizontal stabilizer (with elevators)","The forward fuselage section; consists of radome and nose gear bay","The wing trailing edge; consists of inboard flaps and outboard ailerons","The engine cowling; consists of fan cowl doors and thrust reversers"],"a":0,"e":"Slide 18 details the empennage (tail), which keeps the plane stable and consists of the vertical stabilizer (with rudder) and horizontal stabilizer (with elevators)."},{"id":13,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"Which control surfaces are mounted on the wings to control aircraft roll (banking left or right)?","o":["Ailerons","Elevators","Rudders","Trim tabs"],"a":0,"e":"Slide 19 states that ailerons on the wings control rolling left or right."},{"id":14,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"Which control surface is located on the horizontal stabilizer to control aircraft pitch (climbing or descending)?","o":["Elevators","Ailerons","Rudder","Slats"],"a":0,"e":"Slide 19 indicates that elevators on the horizontal stabilizer control pitch (nose up or down)."},{"id":15,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"Which control surface is attached to the vertical stabilizer to control yaw (turning nose left or right)?","o":["Rudder","Flaps","Elevators","Ailerons"],"a":0,"e":"Slide 19 explains that the rudder on the vertical stabilizer controls yaw (left/right direction)."},{"id":16,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What is the key purpose of wing flaps and slats during takeoff and landing?","o":["Increase aerodynamic lift at low speeds","Decrease wing surface area to achieve supersonic speed","Disconnect the flight controls from hydraulic actuators","Prevent jet engine exhaust from entering the cabin air ducts"],"a":0,"e":"Slide 20 explains that flaps and slats increase lift at low speeds, aiding safe takeoff and landing."},{"id":17,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"What characterizes a 'narrow-body' commercial aircraft?","o":["A single passenger aisle with seating typically up to 6 across (e.g., Boeing 737, Airbus A320)","Two passenger aisles designed exclusively for intercontinental routes above 10 hours","No passenger windows and reinforced main-deck cargo floors","An unpressurized cabin operating only between remote non-towered airstrips"],"a":0,"e":"Slide 21 describes narrow-body aircraft as single-aisle planes used for short- to medium-haul transport, such as the B737 and A320."},{"id":18,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"What distinguishes a 'wide-body' aircraft from a narrow-body aircraft?","o":["Twin passenger aisles with higher passenger and cargo capacity (e.g., Boeing 777, Airbus A350)","A single aisle with turboprop engines mounted above high wings","Open-air seating bays for regional sightseeing flights","Operation restricted strictly to military aerial refueling"],"a":0,"e":"Slide 21 notes wide-body aircraft feature twin aisles with large passenger and cargo capacity for long-haul routes."},{"id":19,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"What examples of regional jets are highlighted in the presentation?","o":["Embraer E190 and Bombardier CRJ","Airbus A380 and Boeing 747-8","Lockheed C-130 and Boeing C-17","Concorde and Tupolev Tu-144"],"a":0,"e":"Slide 22 gives the Embraer E190 and Bombardier CRJ as prime examples of regional jets operating on short regional routes."},{"id":20,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"What does the aviation acronym 'P2F' stand for?","o":["Passenger to Freighter","Pilot to Flight","Pushback to Flight-deck","Payload to Fuel"],"a":0,"e":"Slide 23 explains that P2F stands for Passenger to Freighter, referring to retired or modified passenger planes converted for dedicated cargo service."},{"id":21,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"Which capability defines rotary-wing aircraft (helicopters) in the presentation?","o":["Vertical Takeoff and Landing (VTOL), hovering, and exceptional low-speed maneuverability","High-altitude supersonic cruise above Mach 2.0 without refueling","Long-distance intercontinental transport exceeding 8,000 nautical miles","Unpowered glide flight utilizing rising thermal updrafts"],"a":0,"e":"Slide 24 highlights helicopters as rotary-wing aircraft used for VTOL, hovering, and maneuvering in confined spaces."},{"id":22,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"What five categories of airlines are listed in the presentation?","o":["Full-Service Airlines, Low-Cost Carriers, Regional Airlines, Charter Airlines, and Cargo Airlines","Government Airlines, Private Jets, Aerial Ambulance, Flight Training, and Crop Dusters","Domestic Trunk Lines, Commuter Turboprops, Air Taxi, Floatplane, and Helicopter Shuttles","Continental Flagship, Budget Commuter, Military Transport, Space-cargo, and Humanitarian"],"a":0,"e":"Slide 29 lists Full-Service Airlines, Low-Cost Carriers, Regional Airlines, Charter Airlines, and Cargo Airlines."},{"id":23,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"What are the three primary zones of an airport identified in the presentation?","o":["Landside, Terminal, and Airside","Hangar, Runway, and Control Tower","Inbound Concourse, Outbound Concourse, and Baggage Bay","Customs Zone, Apron Zone, and Runway Safety Area"],"a":0,"e":"Slide 30 divides an airport into three main zones: Landside, Terminal, and Airside."},{"id":24,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"Which airport zone is defined as unrestricted and freely accessible to both traveling and non-traveling public?","o":["Landside","Airside","Apron / Ramp","Movement Area"],"a":0,"e":"Slide 31 defines Landside as the unrestricted area of an airport where traveling and non-traveling individuals have free access."},{"id":25,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"What is the core function of the airport terminal building?","o":["A facility where passengers, baggage, and cargo are processed to transition between surface and air transport","A storage shed where grounded aircraft undergo major structural overhaul","A secured bunker from which Air Traffic Controllers direct air routes","A refueling depot where aviation turbine fuel is filtered and piped"],"a":0,"e":"Slide 32 describes the terminal building as where passengers, baggage, and cargo are processed and transition between surface modes and aircraft."},{"id":26,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"Which facilities are located inside the airport terminal building according to Slide 33?","o":["Check-in counters, Security check, Immigration & Customs, Boarding gates, and Baggage claim area","Runways, Taxiways, Aircraft parking stands, Hangars, and Fuel farm","Airport perimeter fences, Instrument Landing System (ILS) antenna, and Fire crash station","Jet engine test cells, Flight simulator halls, and Ramp catering loading bays"],"a":0,"e":"Slide 33 lists Check-in counters, Security check, Immigration & Customs, Boarding gates, and Baggage claim area inside the terminal building."},{"id":27,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"What is the Airside area of an airport?","o":["The secured, restricted movement area where aircraft operations and servicing take place","The public sidewalk in front of the departures concourse for passenger drop-off","The commercial shopping plaza located prior to security screening checkpoints","The administrative headquarters of the municipal civil aviation ministry"],"a":0,"e":"Slide 34 defines Airside as the secured, restricted area where aircraft operations take place, also known as the movement area."},{"id":28,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"Which facilities belong to the Airside zone as listed on Slide 35?","o":["Runways, Taxiways, Apron/Ramp, Aircraft stands/bays, Air Traffic Control Tower, and Hangars","Short-term parking lots, Public bus stops, Curbside check-in, and Taxi queues","Airline ticketing sales office, Hotel transit desks, and Currency exchange counters","Passenger duty-free shops, Food courts, and Public observation decks"],"a":0,"e":"Slide 35 lists Runways, Taxiways, Apron/Ramp, Aircraft stands/bays, ATC Tower, and Hangars as airside facilities."},{"id":29,"c":"Aviation History & Milestones","source":"Ground Handling PPT","q":"Who conducted the first controlled, sustained, and powered heavier-than-air flight at Kitty Hawk in 1903?","o":["The Wright Brothers (Orville and Wilbur Wright)","Otto Lilienthal","Sir George Cayley","Charles Lindbergh"],"a":0,"e":"Slide 39 highlights the Wright Brothers' historic 1903 flight at Kitty Hawk as the first controlled, sustained, and powered flight."},{"id":30,"c":"Aviation History & Milestones","source":"Ground Handling PPT","q":"What historic milestone took place in 1783 involving the Montgolfier brothers?","o":["The first successful human hot-air balloon flight","The invention of the internal combustion aircraft engine","The first solo transatlantic flight","The construction of the first rigid metal airship"],"a":0,"e":"Slide 37 highlights 1783 for the Montgolfier brothers' hot air balloon demonstration in aviation history."},{"id":31,"c":"Aviation History & Milestones","source":"Ground Handling PPT","q":"Which 19th-century pioneer formulated the foundational aerodynamic concepts of lift, drag, and thrust?","o":["Sir George Cayley","Leonardo da Vinci","Otto Lilienthal","Ferdinand von Zeppelin"],"a":0,"e":"Slide 38 credits Sir George Cayley with discovering and defining the fundamental concepts of lift, drag, and thrust."},{"id":32,"c":"Aviation History & Milestones","source":"Ground Handling PPT","q":"What landmark achievement did Charles Lindbergh accomplish in 1927?","o":["First solo nonstop transatlantic flight (New York to Paris)","First supersonic flight breaking the sound barrier","First circumnavigation of the globe by commercial airliner","Establishment of the International Civil Aviation Organization"],"a":0,"e":"Slide 41 notes Lindbergh's solo transatlantic flight in 1927 as a pivotal milestone in aviation history."},{"id":33,"c":"Aviation History & Milestones","source":"Ground Handling PPT","q":"Which aircraft introduced commercial jet passenger service in 1952?","o":["de Havilland Comet","Boeing 707","Douglas DC-8","Sud Aviation Caravelle"],"a":0,"e":"Slide 43 identifies the de Havilland Comet (1952) as the pioneer of commercial passenger jet aviation."},{"id":34,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What does the acronym ICAO stand for, and where is its global headquarters located?","o":["International Civil Aviation Organization; Montreal, Canada","International Commercial Airline Office; Geneva, Switzerland","Intercontinental Civil Aeronautics Order; Washington, D.C., USA","International Cargo Airport Oversight; London, United Kingdom"],"a":0,"e":"Slides 46-48 confirm ICAO stands for International Civil Aviation Organization, headquartered in Montreal, Canada."},{"id":35,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What are the two foundation years associated with ICAO as cited in Slide 47?","o":["1919 (1st Foundation / ICAN) and 1945 (2nd Foundation / Chicago Convention)","1903 and 1927","1939 and 1958","1948 and 1991"],"a":0,"e":"Slide 47 notes 1919 as the 1st foundation (Paris/ICAN) and 1945 as the 2nd foundation (Chicago Convention/PICAO/ICAO)."},{"id":36,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What is IATA's principal area of activity according to the presentation?","o":["Commercial activity: standardizing airline ticketing, fares, documents, and financial clearing","Military air combat tactical doctrine and territorial defense","Air Traffic Control tower radar hardware development","Direct municipal management of airport passenger terminals"],"a":0,"e":"Slide 278 and Slide 46 emphasize that IATA's activity area is commercial, focusing on airline standards, safety, financial, and legal issues."},{"id":37,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What does ACI stand for, and when was it established?","o":["Airports Council International; established in 1991 in Montreal, Canada","Aviation Cargo International; established in 1945 in Paris, France","Airline Certification Institute; established in 1958 in London, UK","Aerodrome Compliance Inspectorate; established in 1974 in Brussels, Belgium"],"a":0,"e":"Slide 51 states Airports Council International (ACI) was established in 1991 with headquarters in Montreal, Canada."},{"id":38,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What is the primary role of a National Aviation Authority (NAA)?","o":["Governmental body regulating and overseeing civil aviation, safety, airworthiness, and licensing within a country","Commercial travel agency booking international airline tickets for government staff","Private aircraft maintenance company servicing corporate business jets","Trade union representing commercial airline pilots and cabin crew"],"a":0,"e":"Slide 53 defines an NAA as the governmental body responsible for civil aviation regulation, airworthiness, certification, licensing, and safety oversight in a nation."},{"id":39,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"In the ICAO Aviation Phonetic Alphabet, which words represent the letters C, D, and E?","o":["Charlie, Delta, Echo","Canada, David, Edward","Central, Danger, Eagle","Chicago, Direct, Energy"],"a":0,"e":"Standard ICAO radiotelephony phonetics: A - Alfa, B - Bravo, C - Charlie, D - Delta, E - Echo, F - Foxtrot, etc."},{"id":40,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"In the ICAO Aviation Phonetic Alphabet, which words represent the letters J, K, and L?","o":["Juliett, Kilo, Lima","Japan, King, London","Jupiter, Kangaroo, Lemon","Justice, Knight, Liberty"],"a":0,"e":"In the ICAO phonetic alphabet: J is Juliett (spelled with two t's), K is Kilo, and L is Lima."},{"id":41,"c":"Ground Handling Operations","source":"Ground Handling PPT","q":"How does the presentation define 'Ground Handling' in aviation?","o":["The range of services provided to support an aircraft, passengers, and cargo while the aircraft is on the ground between flights","The aerodynamic testing of prototype wing structures inside wind tunnels","The direct radar guidance of airborne flights by area air traffic controllers","The financial leasing of aircraft engines by commercial manufacturing firms"],"a":0,"e":"Slide 57 defines ground handling as the range of services provided to support an aircraft and its occupants while on the ground."},{"id":42,"c":"Ground Handling Operations","source":"Ground Handling PPT","q":"Which of the following are listed as the main components of ground handling on Slide 59?","o":["Passenger Services, Ramp Services, Cargo/Mail Handling, Technical Services, Catering Services, and Administration","Aircraft Engine Overhaul, Avionics Fabrication, Flight Deck Simulator Training, and ATC Radar","Airport Construction, Airspace Design, Runway Resurfacing, and Fuel Refining","In-flight Entertainment Production, Hotel Hospitality, and Duty-Free Manufacturing"],"a":0,"e":"Slide 59 lists Passenger Services, Ramp Services, Cargo and Mail Handling, Technical Services, Catering Services, and Administration as main components."},{"id":43,"c":"Ground Handling Operations","source":"Ground Handling PPT","q":"What types of ground handling service providers operate at airports?","o":["Airline self-handling units and third-party ground handling agencies (e.g., Swissport, Dnata)","Military aerial regiments and border coast guard stations exclusively","Airport architectural contractors and electrical utility providers","Commercial passenger marketing firms and credit card merchants"],"a":0,"e":"Slide 61 indicates ground handling is performed either by airline self-handling units or third-party service providers like Swissport or Dnata."},{"id":44,"c":"Ground Handling Operations","source":"Ground Handling PPT","q":"Why are efficient ground handling services critical to airline operations?","o":["They ensure on-time performance (OTP), maintain safety and security, reduce turnaround time (TAT), and enhance passenger experience","They eliminate the requirement for certified pilots on short regional routes","They bypass all security and customs screening requirements for international transit","They eliminate the need for aircraft fuel and weight calculation manifests"],"a":0,"e":"Slide 63 highlights that efficient ground handling ensures on-time performance, safety, enhanced passenger experience, and minimized turnaround times."},{"id":45,"c":"Reservations & Ticketing","source":"Ground Handling PPT","q":"What is the distinction between a reservation and ticketing in aviation?","o":["Reservation is holding a seat for a specific flight; Ticketing is issuing the confirmed travel contract document","Reservation is checking baggage at the counter; Ticketing is boarding the aircraft gate","Reservation is done only at the airport ticket desk; Ticketing is done exclusively online","Reservation applies only to cargo shipments; Ticketing applies only to passenger travel"],"a":0,"e":"Slide 65 explains: Reservation is the process of booking a seat on an aircraft; Ticketing is issuing the legal travel document confirming that booking."},{"id":46,"c":"Reservations & Ticketing","source":"Ground Handling PPT","q":"What does the abbreviation GDS stand for in airline distribution?","o":["Global Distribution System","General Departure Schedule","Ground Dispatch System","Global Document Standard"],"a":0,"e":"Slide 67 includes Global Distribution Systems (GDS, e.g., Amadeus, Sabre, Travelport) as major reservation channels."},{"id":47,"c":"Reservations & Ticketing","source":"Ground Handling PPT","q":"What is the correct sequential workflow of an airline reservation system as shown on Slide 69?","o":["Search Flights → Selection & Booking → Fare Calculation → Payment → Issuance of E-ticket","Payment → Search Flights → Issuance of E-ticket → Booking → Gate Check-in","Issuance of E-ticket → Fare Calculation → Search Flights → Payment → Selection","Booking → Boarding Pass Print → Flight Search → Fare Calculation → Payment"],"a":0,"e":"Slide 69 outlines the reservation workflow: Searches for Flights → Flight Selection and Booking → Fare Calculation → Payment → Issuance of E-ticket."},{"id":48,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What are the core duties performed by airport check-in agents according to Slide 73?","o":["Greet passengers, verify travel documents, check in passengers, issue boarding passes, and weigh/tag baggage","Inspect aircraft jet engines, guide pushback tugs, and pump aviation jet fuel","Direct aircraft through air corridors using primary surveillance radar","Prepare hot meals inside the airport flight catering flight kitchen"],"a":0,"e":"Slide 73 defines check-in duties: greet passengers, verify documents, check-in passengers, issue boarding passes, and weigh, tag, and dispatch baggage."},{"id":49,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What are frequent challenges faced by check-in staff during airport operations?","o":["Dealing with long queues, irate passengers during delays, system outages, and excess baggage disputes","Refueling aircraft tanks under bad weather conditions and inspecting tire treads","Directing runway snow plows and calculating aircraft engine thrust settings","Translating air-to-ground radio transmissions for en-route air traffic control"],"a":0,"e":"Slide 75 lists dealing with long lines, irate passengers during delays, managing airline systems, and handling excess baggage."},{"id":50,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What takes place during airport immigration and customs procedures as described in Slide 77?","o":["Verification of passports and visas for entry eligibility, and interview of travelers if required","Weighing and tagging passenger cabin roll-aboard suitcases","Assignment of passenger cabin seats and frequent flyer miles accrual","Marshalling aircraft into the parking stand using illuminated wands"],"a":0,"e":"Slide 77 states immigration and customs verify passports and visas for validity, interview passengers if necessary, and ensure legal entry compliance."},{"id":51,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What key tasks are carried out during the Pre-Boarding phase according to Slide 80?","o":["Gate preparation, document verification, pre-boarding announcements, and priority passenger assistance","Disembarking inbound arriving passengers and directing them to customs","Cleaning passenger lavatories and unloading bulk baggage from the aft cargo hold","Filing the flight plan with local civil aviation air traffic control authorities"],"a":0,"e":"Slide 80 lists Gate Preparation, Document and Identity Verification, Pre-Boarding Announcements, and Priority/Special passenger assistance."},{"id":52,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"Which challenges do gate agents frequently confront during aircraft boarding according to Slide 87?","o":["Late passengers, seat disputes, full overhead bin space, and disruptive passengers","Engine oil leaks, landing gear tire deflation, and crosswind turbulence","Runway friction loss, taxiway repaving, and air traffic radar blanking","Baggage carousel conveyor motor failures and airport parking ticket jams"],"a":0,"e":"Slide 87 identifies late passengers, seat disputes, full overhead bin space, disruptive passengers, and flight delays as prime boarding challenges."},{"id":53,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What does Arrival Handling encompass as described on Slide 89?","o":["Coordinating aircraft docking, passenger disembarkation, transit/transfer assistance, and baggage delivery","Selling promotional ticket reservations for future travel routes at check-in desks","Pre-flight meal heating inside the aircraft galley ovens before pushback","Issuing departure tax receipts to outbound international tourists"],"a":0,"e":"Slide 89-90 defines arrival handling as managing passengers and baggage from aircraft landing until airport exit, including docking, disembarkation, transfer, and baggage reclaim."},{"id":54,"c":"Check-in & Passenger Types","source":"Ground Handling PPT","q":"Which check-in methods are listed on Slide 95?","o":["Manual check-in, Departure Control System (DCS), Self check-in, Online check-in, Stand-by check-in, and Through check-in","In-flight check-in, Cockpit check-in, Runway check-in, and Customs-only check-in","Baggage carousel check-in, Jet-bridge check-in, and Pushback check-in","Pilot radio check-in, Radar transponder check-in, and Hangar check-in"],"a":0,"e":"Slide 95 lists Manual Check-in, DCS Check-in, Self Check-in, Online Check-in, Stand-by Check-in, and Through Check-in."},{"id":55,"c":"Check-in & Passenger Types","source":"Ground Handling PPT","q":"What is 'Through Check-in'?","o":["Checking in a passenger and their baggage across connecting flights to the final destination in a single transaction","Passing through airport security without showing any identification or boarding pass","Checking in directly from inside an automobile without leaving the vehicle","A fast check-in method reserved exclusively for airline flight crew members"],"a":0,"e":"Through check-in allows passengers traveling on connecting multi-sector flights to receive boarding passes and check baggage straight to the final destination."},{"id":56,"c":"Check-in & Passenger Types","source":"Ground Handling PPT","q":"What does the travel purpose category 'VFR' stand for in passenger demographics?","o":["Visiting Friends and Relatives","Visual Flight Regulations","Variable Fare Rate","Verified Frequent Rider"],"a":0,"e":"Slide 97 lists VFR as 'Visiting Friends and Relatives', a major classification alongside business and leisure travel."},{"id":57,"c":"Check-in & Passenger Types","source":"Ground Handling PPT","q":"What is a 'No-show' passenger?","o":["A passenger holding a confirmed reservation who fails to arrive for the flight before check-in closes","A passenger who boards without a ticket using false documentation","A passenger who travels without any checked or cabin baggage","A passenger who declines in-flight meal service"],"a":0,"e":"In aviation and check-in terminology, a no-show is a ticketed passenger with a confirmed seat who fails to appear for departure."},{"id":58,"c":"Check-in & Passenger Types","source":"Ground Handling PPT","q":"What is a 'Go-show' passenger in airline ground operations?","o":["A passenger who arrives at the airport without an advance booking seeking a seat on the next departure","A passenger who purchases an expensive first-class seat months in advance","A passenger who cancels their flight after boarding the aircraft","An airline crew member deadheading to another operational base"],"a":0,"e":"A go-show is an unbooked traveler who arrives at the airport counter hoping to purchase an available seat or be accommodated on the spot."},{"id":59,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"What are the two primary baggage acceptance allowance systems explained on Slide 100?","o":["Weight Concept and Piece Concept","Volume Concept and Density Concept","Cabin Concept and Cargo Concept","Domestic Concept and International Concept"],"a":0,"e":"Slide 100 explains that baggage acceptance at check-in is governed by two main systems: the Weight Concept and the Piece Concept."},{"id":60,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"How does the 'Weight Concept' function for passenger baggage?","o":["Passengers are permitted a total weight allowance regardless of the number of individual bags checked","Passengers may only check one bag which must weigh an exact predetermined amount","Passengers are charged per bag based strictly on the passenger's own body weight","Baggage weight is measured only upon arrival at the final destination airport"],"a":0,"e":"Slide 102 explains that under the Weight Concept, passengers are allowed a total aggregate weight, regardless of how many bags they check."},{"id":61,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"How does the 'Piece Concept' govern baggage allowance?","o":["Passengers are permitted a specific number of bags, with distinct weight and size limits applied to each bag","Passengers can carry unlimited bags as long as each piece contains only clothing","Baggage is charged solely based on the length of the longest zipper on the bag","Baggage allowances are calculated based on the total number of passengers on board"],"a":0,"e":"Slide 104 defines the Piece Concept as allowing a specific number of bags, each subject to individual weight and dimension limits (e.g., 2 bags up to 23 kg each)."},{"id":62,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"What is the typical maximum weight limit for any single checked bag, enforced for occupational health and safety?","o":["32 kg (70 lbs)","20 kg (44 lbs)","45 kg (100 lbs)","15 kg (33 lbs)"],"a":0,"e":"Slide 105 specifies that for occupational health and safety of baggage handlers, a single checked bag typically must not exceed 32 kg (70 lbs)."},{"id":63,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"Which mandatory security questions must check-in agents ask passengers when accepting baggage?","o":["'Does this bag belong to you?' and 'Have you packed your bag yourself?'","'What is the financial value of the clothes inside this bag?'","'How many years have you owned this luggage piece?'","'Can you name the air traffic controller on duty today?'"],"a":0,"e":"Slide 106 highlights mandatory security verification questions: 'Does this bag belong to you?' and 'Have you packed your bag yourself?'"},{"id":64,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"What does the code 'CBBQ' or 'CBBG' stand for in passenger baggage handling?","o":["Cabin Seat Baggage (delicate or bulky item occupying a purchased passenger seat)","Checked Baggage Bulk Goods","Cargo Bay Box Group","Cabin Boarding Baggage Gate"],"a":0,"e":"Slide 107 defines CBBG as Cabin Seat Baggage—baggage not suitable for loading in the cargo hold (e.g., cellos, fragile instruments) that occupies a paid seat."},{"id":65,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"When is a 'Limited Release Tag' (LRT) attached to a passenger's checked baggage?","o":["When the bag is pre-damaged, unsuitably packed, fragile, or accepted without airline liability for existing defects","When a passenger pays for a first-class ticket and demands priority delivery","When the bag contains dangerous goods approved for transport in the cabin","When the aircraft cargo hold is completely full and the bag is left behind"],"a":0,"e":"Slide 110: A Limited Release Tag releases the airline from liability when baggage is already torn/damaged, fragile, or insufficiently packed."},{"id":66,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"Which of the following special baggage tags are listed on Slide 109?","o":["Priority Tags, Heavy Tags, Cabin Tags, Wheelchair Tags, COMAIL Tags, and Rush Tags","Airworthiness Tags, Flight Deck Tags, Engine Cowling Tags, and Fuel Tank Tags","Runway Clearance Tags, Radar Calibration Tags, and Pilot Uniform Tags","Passenger Passport Tags, Visa Tags, Boarding Gate Tags, and Ticket Tags"],"a":0,"e":"Slide 109 lists Cabin Tags, Short Connection Tags, COMAIL Tags, Wheelchair Tags, Priority Tags, Heavy Tags, and Rush Tags."},{"id":67,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does the abbreviation 'PRM' stand for in airport passenger handling?","o":["Persons with Reduced Mobility","Passenger Ramp Manager","Priority Route Manifest","Passenger Regional Membership"],"a":0,"e":"Slide 93 & 112 define PRM as Persons with Reduced Mobility, requiring special assistance at airports."},{"id":68,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does the wheelchair code 'WCHR' (Wheelchair Ramp) mean?","o":["Passenger can ascend/descend steps and walk inside the cabin, but requires a wheelchair for ramp/long terminal distances","Passenger cannot walk at all and must be carried into their cabin seat","Passenger can walk long distances but cannot climb boarding stairs","Passenger is traveling with an electric wheelchair stored in the passenger seat"],"a":0,"e":"WCHR means the passenger can climb stairs and walk inside the aircraft cabin, but needs assistance for long terminal distances."},{"id":69,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does the wheelchair code 'WCHS' (Wheelchair Steps) indicate?","o":["Passenger cannot walk up or down stairs, but can walk slowly inside the aircraft cabin to their seat","Passenger is completely paralyzed and needs a high-lift ambulift to enter the aircraft","Passenger only needs a wheelchair upon arrival at the baggage reclaim area","Passenger requires an onboard stretcher across three seats"],"a":0,"e":"WCHS means Wheelchair Steps: the passenger cannot negotiate stairs/steps, but can walk inside the aircraft cabin."},{"id":70,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does the wheelchair code 'WCHC' (Wheelchair Cabin) designate?","o":["Passenger is completely immobile and requires a wheelchair for terminal distance, boarding stairs, and to their cabin seat","Passenger only requires a wheelchair inside the business class lounge","Passenger is traveling with a guide dog occupying an aisle seat","Passenger is temporarily fatigued from a connecting flight"],"a":0,"e":"WCHC means Wheelchair Cabin: the passenger is completely immobile and requires full assistance from terminal to aircraft seat."},{"id":71,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does the industry code 'UMNR' refer to?","o":["Unaccompanied Minor (child traveling without parent or guardian)","Unconfirmed Medical Need Record","Urgent Missing Number Reservation","Unclaimed Missing Navigational Route"],"a":0,"e":"Slide 93 identifies UMNR as Unaccompanied Minor—a child traveling alone who receives special supervision from airline ground staff."},{"id":72,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does the special passenger service code 'STCR' represent?","o":["Stretcher passenger (requiring multiple seats to be blocked with an installed stretcher)","Student Concession Route passenger","Standard Tour Group Coordinator","Security Transit Clearance Required"],"a":0,"e":"Slide 97 & 114: STCR stands for Stretcher case, where a passenger requires an onboard stretcher installed across aircraft seats."},{"id":73,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does the special service request code 'OXYG' specify?","o":["Passenger requires supplemental medical oxygen during the flight","Passenger has scuba gear in their checked baggage","Passenger requires an aisle seat near the emergency exit","Passenger is allergic to air conditioning ozone filters"],"a":0,"e":"Slide 98 & 114: OXYG indicates that the passenger requires therapeutic medical oxygen during flight."},{"id":74,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What is the distinction between 'DEPA' and 'DEPU' in deportee handling?","o":["DEPA is a Deportee Accompanied by escorts; DEPU is a Deportee Unaccompanied by an escort","DEPA is a Deportee by Air; DEPU is a Deportee by Underwater vessel","DEPA is an Approved Deportee; DEPU is an Urgent Deportee","DEPA is a Deportee with Adult children; DEPU is an Underage Deportee"],"a":0,"e":"Slide 116 defines DEPA as Deportee – Accompanied (escorted by law enforcement) and DEPU as Deportee – Unaccompanied."},{"id":75,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What is an Inadmissible Passenger (INAD)?","o":["A traveler who has been refused entry into a country by immigration authorities upon arrival","A passenger who boards without paying the checked baggage excess fee","A traveler who refuses to listen to the pre-flight safety demonstration","A passenger whose flight was cancelled due to bad weather"],"a":0,"e":"Slide 117 defines an INAD (Inadmissible Passenger) as a traveler refused entry by immigration authorities, typically returned to their point of origin."},{"id":76,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"According to Slide 118, what are common reasons for a passenger receiving INAD status?","o":["Invalid or missing visa, expired passport, suspicious travel intent, or counterfeit travel documents","Carrying too many duty-free shopping bags through the arrivals gate","Requesting a special vegan meal without booking 24 hours in advance","Arriving at the destination airport 30 minutes ahead of scheduled time"],"a":0,"e":"Slide 118 lists invalid/missing visa, expired passport/travel documents, and fraudulent paperwork as prime reasons for INAD status."},{"id":77,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What general rule for expectant mothers is highlighted on Slide 113?","o":["Unrestricted travel usually up to 27 weeks; medical clearance certificate required from the 28th week","Complete prohibition from air travel after the 12th week of pregnancy","Air travel permitted without any medical check until 2 hours prior to delivery","Expectant mothers must occupy two separate passenger seats at all times"],"a":0,"e":"Slide 113 notes most airlines allow unrestricted travel up to 27 weeks, requiring doctor fitness certificates thereafter, with travel restricted in late weeks."},{"id":78,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What do Airside Operations encompass according to Slide 120?","o":["All activities and services in the secure airside area (runways, taxiways, aprons, parking stands) for aircraft, passenger, baggage, and cargo handling","Commercial advertising campaigns placed on public highway billboards approaching the airport","Ticketing reservations booked through high-street travel agency shops","Long-term automobile parking management outside the airport terminal perimeter"],"a":0,"e":"Slide 120 defines airside operations as all activities in the secure airside zone (runways, taxiways, aprons, stands) for safe handling of aircraft and traffic."},{"id":79,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What is an aircraft pushback procedure?","o":["Moving an aircraft backward from the gate or parking stand using a specialized tow tug or tractor","Reversing the aircraft using high-power jet engine thrust reversers against terminal windows","Pushing baggage trolleys manually across the apron to the sorting shed","Using air traffic control radar to push arriving aircraft into holding stacks"],"a":0,"e":"Slide 116 & 128 explain pushback: moving an aircraft back from the gate using a pushback tractor after servicing and boarding."},{"id":80,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What does GSE stand for in airport ramp operations?","o":["Ground Support Equipment","General Security Examination","Gate Standard Entry","Global Safety Enclosure"],"a":0,"e":"Slide 127 highlights GSE as Ground Support Equipment—the specialized fleet of vehicles and equipment servicing aircraft on the apron."},{"id":81,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What is the definition of aircraft Turnaround Time (TAT)?","o":["The duration an aircraft spends on the ground between its arrival at the stand and its subsequent departure","The time it takes for an aircraft to perform a complete 360-degree holding turn in the sky","The total time needed to manufacture and assemble an aircraft at the factory","The hours required to overhaul and replace both jet engines during heavy maintenance"],"a":0,"e":"Slide 133 defines turnaround time (TAT) as the time between an aircraft's arrival and its next departure."},{"id":82,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What does 'FOD' stand for in ramp safety, and why is it hazardous?","o":["Foreign Object Debris; items left on the ramp that can be ingested into jet engines or puncture tires","Fuel Operations Document; an invoice recording aviation jet fuel delivery","Flight Order Dispatch; the pilot's final routing release","Forward Overhead Door; the main passenger entry portal"],"a":0,"e":"Slide 119 & 131 explain FOD (Foreign Object Debris/Damage), loose objects on the ground that can destroy jet engines or damage aircraft structures."},{"id":83,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"Which Personal Protective Equipment (PPE) is mandatory for personnel working on the active ramp?","o":["High-visibility vest, hearing protection (ear defenders), and safety boots with toe protection","Nomex fireproof flight suit, pilot sunglasses, and parachute harness","Sterile medical gown, surgical latex gloves, and cloth face mask","Radiation lead apron, scuba breathing tank, and rubber flippers"],"a":0,"e":"Slide 118 & 131 emphasize PPE for ramp safety: high-visibility clothing, hearing protection against high-decibel jet noise, and protective footwear."},{"id":84,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What are the primary functions of Ramp Operations outlined on Slides 124-130?","o":["Aircraft parking/marshaling, baggage/cargo loading, refuelling, GSE operation, pushback, and minor servicing","Passenger passport issuance, international visa approvals, and national customs tariff collection","Manufacturing spare wings, casting titanium engine fan blades, and rewiring cabin seating","Setting international airline ticket fares and managing stock market investor briefings"],"a":0,"e":"Slides 124-130 enumerate ramp functions: aircraft parking, loading/unloading, refueling, GSE operations, pushback, safety, and minor maintenance."},{"id":85,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"What does the abbreviation 'AWB' stand for in air cargo handling?","o":["Air Waybill","Aircraft Weight and Balance","Airworthiness Verification Book","Automated Warehouse Bay"],"a":0,"e":"Slide 121 & 137 define AWB as Air Waybill, the legally binding contract of carriage between the shipper and the airline."},{"id":86,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"What key document lists all cargo consignments loaded onto an aircraft for a specific flight?","o":["Cargo Manifest","Passenger Boarding List","Cabin Service Log","Airport Handling Invoice"],"a":0,"e":"Slide 122 & 137 list the Cargo Manifest as the primary document summarizing all cargo shipments on the flight."},{"id":87,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"What is DGR in air cargo transport?","o":["IATA Dangerous Goods Regulations","Daily Ground Report","Departure Gate Record","Direct General Routing"],"a":0,"e":"Slide 126 & 144 identify DGR as IATA Dangerous Goods Regulations, the worldwide industry standard for shipping hazardous materials safely by air."},{"id":88,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"Which of the following are categorized as 'Special Cargo' types on Slide 144?","o":["Perishable Cargo (PER), Dangerous Goods (DGR), and Live Animals (AVI)","Standard Passenger Suitcases, Backpacks, and Duty-Free Carrier Bags","Printed In-Flight Magazines, Paper Napkins, and Plastic Cutlery","Airport Terminal Floor Tiles, Glass Panes, and Office Desks"],"a":0,"e":"Slide 144 identifies Perishable Cargo, Dangerous Goods (DGR), and Live Animals (AVI) as prime categories of special air cargo."},{"id":89,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"Which methods are utilized for real-time tracking of cargo packages through airport facilities?","o":["Barcode scanners and RFID tags","Passenger passport stamping machines","Terminal flight information display screens","Manual chalk markings on airplane tires"],"a":0,"e":"Slide 124 & 142 highlight barcode scanners and RFID (Radio Frequency Identification) tags for tracking air cargo shipments."},{"id":90,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"Why must cargo loading adhere strictly to weight and balance calculations on Slide 140?","o":["To ensure the aircraft's center of gravity (CG) remains within certified safe aerodynamic operating limits","To verify that all cargo boxes are painted in the airline's corporate color scheme","To prevent passengers in economy class from noticing the weight under their seats","To ensure cargo handlers have equal amounts of work on both sides of the aircraft"],"a":0,"e":"Slide 140 notes cargo is loaded in strict compliance with weight distribution and balance requirements to keep the aircraft within safe limits."},{"id":91,"c":"Aviation Security (AVSEC)","source":"Ground Handling PPT","q":"How does the presentation define 'Aviation Security'?","o":["Safeguarding civil aviation against acts of unlawful interference","Securing financial profits for commercial airline investors","Protecting airport retail shops from inventory loss and theft","Preventing aircraft engines from consuming excess aviation kerosene"],"a":0,"e":"Slide 127 & 153 define aviation security as safeguarding civil aviation against acts of unlawful interference."},{"id":92,"c":"Aviation Security (AVSEC)","source":"Ground Handling PPT","q":"Which of the following are key aspects of airport ground handling security operations?","o":["Access control, passenger screening, hold baggage screening, and cargo screening","Frequent flyer point calculation, lounge catering, and seat upgrade auctions","Aircraft painting, carpet shampooing, and in-flight movie subtitling","Runway centerline repainting and terminal parking ticket validation"],"a":0,"e":"Slide 128 & 153 list access control, passenger screening, baggage screening, and cargo security as vital security operations."},{"id":93,"c":"Aviation Careers & Industry Trends","source":"Ground Handling PPT","q":"Which four career pathways in ground operations are identified on Slide 155-158?","o":["Passenger Services, Ramp Operations, Aircraft Servicing, and Reservation & Ticketing","Commercial Ship Captain, Train Dispatcher, Submarine Pilot, and Highway Patrol","Aviation Insurance Underwriting, Aircraft Metallurgical Smelting, and Radar Engineering","Airport Hotel Chef, Duty-free Retail Buyer, and Limousine Chauffeur"],"a":0,"e":"Slide 155-158 list Passenger Services, Ramp Operations, Aircraft Servicing, and Reservation & Ticketing as key career paths."},{"id":94,"c":"Aviation Careers & Industry Trends","source":"Ground Handling PPT","q":"Which core skill groups are essential for ground operations candidates according to Slide 159?","o":["Customer service skills, soft skills, and technical skills","Martial arts skills, precision aerobatic flying, and deep-sea diving","Computer game design, heavy machinery welding, and financial stock trading","Civil architecture, concrete mixing, and high-voltage electrical grid wiring"],"a":0,"e":"Slide 159 emphasizes Customer Service Skills, Soft Skills (communication, teamwork), and Technical Skills for ground operations personnel."},{"id":95,"c":"Aviation Careers & Industry Trends","source":"Ground Handling PPT","q":"What technological trends are highlighted on Slide 168 as shaping modern aviation?","o":["Autonomous aircraft, drones, artificial intelligence (AI), and machine learning","Steam-powered turbochargers, coal-fired auxiliary boilers, and wooden wings","Return to fabric-covered biplanes and manual paper-only passenger manifests","Replacement of all radar systems with optical signal lanterns on tower roofs"],"a":0,"e":"Slide 168 highlights Autonomous aircraft, drones, AI, and machine learning as key technological trends transforming aviation."},{"id":96,"c":"Aviation Careers & Industry Trends","source":"Ground Handling PPT","q":"What environmental sustainability trends are emphasized in the presentation?","o":["Green aviation, Sustainable Aviation Fuels (SAF), and carbon-emission reduction targets","Eliminating all international flights in favor of ocean liners","Operating aircraft exclusively without wing flaps or landing gear","Venting excess aviation fuel into the upper stratosphere during cruise"],"a":0,"e":"Slide 168 highlights green aviation, sustainable fuels (SAF), and carbon emission reduction as critical industry sustainability trends."},{"id":97,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"What are the four fundamental forces acting on an aircraft in flight?","o":["Lift, Weight (Gravity), Thrust, and Drag","Speed, Momentum, Inertia, and Friction","Centrifugal force, Buoyancy, Pressure, and Tension","Angle of attack, Stall, Pitch, and Roll"],"a":0,"e":"The four forces of flight are Lift (acting upward), Weight (gravity downward), Thrust (forward by engines), and Drag (rearward resistance)."},{"id":98,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"When an aircraft is in steady, unaccelerated level flight, what is the mathematical relationship between the four forces?","o":["Lift equals Weight, and Thrust equals Drag","Lift is twice the Weight, and Thrust is four times the Drag","Thrust exceeds Drag by 50%, and Lift is constantly decreasing","Weight exceeds Lift, and Drag is equal to zero"],"a":0,"e":"In unaccelerated, straight-and-level flight, an aircraft is in equilibrium: Lift = Weight, and Thrust = Drag."},{"id":99,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"According to Bernoulli's Principle, how do airplane wings generate aerodynamic lift?","o":["Air traveling over the curved upper surface moves faster, creating lower static pressure compared to the higher pressure beneath the wing","Air bounces off the upper wing surface, creating a downward vacuum that pulls the plane upward","Cold air underneath the wing heats up from friction, pushing the wing upward like a hot-air balloon","The wing blades spin in circles to drill through the ambient air like a screw"],"a":0,"e":"Bernoulli's Principle: Higher velocity air over the cambered upper surface reduces pressure, producing a net upward lifting force."},{"id":100,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"What is the aerodynamic 'Angle of Attack' (AoA)?","o":["The angle between the wing's chord line and the oncoming relative wind direction","The angle between the aircraft fuselage and the runway surface during flare","The angle of bank between the wings and the horizontal horizon during a turn","The climb angle relative to the earth's gravitational equator"],"a":0,"e":"Angle of Attack (AoA) is the angle between the wing's chord line (an imaginary line from leading to trailing edge) and the relative wind."},{"id":101,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"What causes an aerodynamic stall in an aircraft wing?","o":["Exceeding the critical angle of attack, causing airflow over the upper wing surface to separate and destroy lift","The jet engines running out of aviation fuel while in cruise flight","Airspeed dropping below the speed of sound while at high altitude","The aircraft autopilot disconnecting during bad weather"],"a":0,"e":"An aerodynamic stall occurs when the wing exceeds its critical angle of attack, causing airflow separation and an abrupt loss of lift, regardless of airspeed."},{"id":102,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"What are the two major categories of aerodynamic drag on an airplane?","o":["Parasite drag (form, skin friction, interference) and Induced drag (byproduct of lift)","Surface drag and High-altitude drag","Forward engine drag and Reverse thrust drag","Cabin window drag and Landing gear wheel drag"],"a":0,"e":"Total drag is divided into Parasite drag (resistance of the aircraft moving through air) and Induced drag (generated as a necessary byproduct of creating lift)."},{"id":103,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What are the three imaginary axes of an aircraft that pass through its Center of Gravity (CG)?","o":["Longitudinal axis, Lateral axis, and Vertical (Normal) axis","Horizontal axis, Circular axis, and Altitude axis","Equatorial axis, Polar axis, and Meridian axis","Thrust axis, Glide axis, and Runway axis"],"a":0,"e":"Aircraft rotate around three axes through their center of gravity: Longitudinal (roll), Lateral (pitch), and Vertical (yaw)."},{"id":104,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"Movement about the Longitudinal axis (extending nose to tail) is called what, and which control surface manages it?","o":["Roll; controlled by the Ailerons","Pitch; controlled by the Elevators","Yaw; controlled by the Rudder","Heave; controlled by the Flaps"],"a":0,"e":"Rotation around the longitudinal axis (nose to tail) is Roll, controlled primarily by the ailerons on the outer trailing edge of the wings."},{"id":105,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"Movement about the Lateral axis (extending wingtip to wingtip) is called what, and which control surface governs it?","o":["Pitch; controlled by the Elevators","Roll; controlled by the Ailerons","Yaw; controlled by the Rudder","Sideslip; controlled by the Spoilers"],"a":0,"e":"Rotation around the lateral axis (wingtip to wingtip) is Pitch (nose up or down), controlled by the elevators on the horizontal stabilizer."},{"id":106,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"Movement about the Vertical axis (running top to bottom through the fuselage) is called what, and which control surface controls it?","o":["Yaw; controlled by the Rudder","Pitch; controlled by the Elevators","Roll; controlled by the Winglets","Surge; controlled by the Engine Throttle"],"a":0,"e":"Rotation around the vertical axis is Yaw (nose pointing left or right), governed by the rudder mounted on the vertical stabilizer."},{"id":107,"c":"Aviation Atmosphere & Weather","source":"Basics of Aviation","q":"What are the standard international sea level atmospheric pressure and temperature defined by ICAO (ISA)?","o":["1013.25 hPa (29.92 inches of mercury) and 15°C (59°F)","1000.00 hPa (30.00 inches of mercury) and 20°C (68°F)","1025.50 hPa (28.50 inches of mercury) and 0°C (32°F)","980.00 hPa (27.80 inches of mercury) and 25°C (77°F)"],"a":0,"e":"Standard atmospheric conditions at sea level (ICAO Standard Atmosphere - ISA) are 1013.25 hPa / mb (29.92 inHg) and 15°C."},{"id":108,"c":"Aviation Atmosphere & Weather","source":"Basics of Aviation","q":"What is the altimeter subscale setting 'QNH'?","o":["Barometric pressure setting that causes the altimeter to read altitude above Mean Sea Level (MSL)","Pressure setting that makes the altimeter read zero when on the runway (height above aerodrome)","Standard pressure setting (1013.25 hPa) used when cruising above the transition altitude","The cabin pressurization setting chosen by the flight attendant supervisor"],"a":0,"e":"QNH is the altimeter setting that gives aircraft altitude above Mean Sea Level (MSL), reading airport elevation when on the ground."},{"id":109,"c":"Aviation Atmosphere & Weather","source":"Basics of Aviation","q":"What is the altimeter subscale setting 'QFE'?","o":["Pressure setting that causes the altimeter to read height above the airfield elevation (reads zero on runway)","Pressure setting giving height above the highest mountain within 100 miles","Standard altimeter setting used by transoceanic flights over the Atlantic","The differential air pressure measured inside the aircraft fuel tanks"],"a":0,"e":"QFE is the barometric pressure setting that makes the altimeter read 0 when the aircraft wheels are resting on the runway threshold."},{"id":110,"c":"Aviation Atmosphere & Weather","source":"Basics of Aviation","q":"What does the aviation weather report abbreviation 'METAR' stand for?","o":["Meteorological Aerodrome Report (Aviation Routine Weather Report)","Maximum En-route Terminal Altitude Review","Mid-air Emergency Traffic Avoidance Radar","Military Electronic Target Acquisition Range"],"a":0,"e":"METAR is the French/international acronym for 'Météorologique Aviation Régulière'—the Aviation Routine Weather Report issued hourly or half-hourly."},{"id":111,"c":"Aviation Atmosphere & Weather","source":"Basics of Aviation","q":"What does the aviation weather code 'CAVOK' indicate?","o":["Ceiling And Visibility OK (visibility ≥ 10 km, no clouds below 5,000 ft, no significant weather)","Cold Air Vortex Over Kansas","Clear Air Velocity Observation Kite","Cancel All VFR Operations Immediately"],"a":0,"e":"CAVOK indicates Ceiling And Visibility OK: visibility 10 km or greater, no clouds below 5,000 ft or minimum sector altitude, and no cumulonimbus or weather."},{"id":112,"c":"Aviation Atmosphere & Weather","source":"Basics of Aviation","q":"Which cloud type presents the most extreme hazards to flight (severe turbulence, hail, icing, microbursts)?","o":["Cumulonimbus (CB)","Cirrus (CI)","Altostratus (AS)","Stratocumulus (SC)"],"a":0,"e":"Cumulonimbus (CB) clouds—thunderstorm clouds—are dangerous weather formations featuring violent updrafts, downdrafts, hail, icing, and severe microbursts."},{"id":113,"c":"Air Traffic Control & Emergencies","source":"Basics of Aviation","q":"Which transponder squawk code indicates an aircraft is experiencing unlawful interference (hijacking)?","o":["7500","7600","7700","1200"],"a":0,"e":"Transponder code 7500 indicates hijacking / unlawful interference ('75 - taken alive')."},{"id":114,"c":"Air Traffic Control & Emergencies","source":"Basics of Aviation","q":"Which transponder squawk code signals a complete radio communications failure (lost comms)?","o":["7600","7500","7700","7000"],"a":0,"e":"Transponder code 7600 signals radio communication failure ('76 - radio in a fix')."},{"id":115,"c":"Air Traffic Control & Emergencies","source":"Basics of Aviation","q":"Which transponder squawk code signals a general in-flight emergency (Mayday)?","o":["7700","7500","7600","2000"],"a":0,"e":"Transponder code 7700 alerts ATC to a general emergency / distress situation ('77 - going to heaven / emergency')."},{"id":116,"c":"Air Traffic Control & Emergencies","source":"Basics of Aviation","q":"What is the internationally recognized radio distress call denoting grave and imminent danger?","o":["MAYDAY (repeated three times)","PAN-PAN (repeated three times)","SECURITE (repeated three times)","EMERGENCY STOP (repeated three times)"],"a":0,"e":"MAYDAY (derived from French 'm'aider' - help me) is spoken three times to declare a life-threatening distress situation."},{"id":117,"c":"Air Traffic Control & Emergencies","source":"Basics of Aviation","q":"What urgency call is used when an aircraft has an urgent safety situation that does not pose immediate life-threatening peril?","o":["PAN-PAN (repeated three times)","MAYDAY (repeated three times)","ROGER THAT (repeated three times)","WILCO (repeated three times)"],"a":0,"e":"PAN-PAN (from French 'panne' - breakdown) is the urgency signal for serious situations not immediately endangering life or aircraft."},{"id":118,"c":"Runways, Taxiways & Airfield","source":"Basics of Aviation","q":"How are runway numbers designated around the world?","o":["By their magnetic heading rounded to the nearest 10 degrees and divided by 10 (e.g., 090° is Runway 09)","In sequential order based on when the runway was constructed at the airport","By the length of the runway in thousands of feet","According to the elevation of the threshold above sea level"],"a":0,"e":"Runways are numbered based on magnetic azimuth divided by 10. A runway aligned along 093° magnetic heading is designated Runway 09."},{"id":119,"c":"Runways, Taxiways & Airfield","source":"Basics of Aviation","q":"If an aircraft takes off on Runway 09, what is the designation of the reciprocal runway at the opposite end?","o":["Runway 27 (090° + 180° = 270°)","Runway 18 (090° + 090° = 180°)","Runway 36 (090° + 270° = 360°)","Runway 04 (090° - 050° = 040°)"],"a":0,"e":"Runway pairs are reciprocal ends separated by 180° (18 units). Opposite of Runway 09 is Runway 27 (9 + 18 = 27)."},{"id":120,"c":"Runways, Taxiways & Airfield","source":"Basics of Aviation","q":"Why do aircraft preferentially take off and land facing into the wind (headwind)?","o":["Headwind increases airspeed across the wings, generating higher lift and reducing ground takeoff/landing roll distance","Headwind pushes the aircraft backwards so fuel burn is halved","Headwind cools the passenger cabin through open cockpit vents","Headwind reduces the noise generated by jet engines toward terminal gates"],"a":0,"e":"A headwind gives greater airspeed for the same ground speed, producing higher lift and significantly shortening the required takeoff and landing distance."},{"id":121,"c":"Runways, Taxiways & Airfield","source":"Basics of Aviation","q":"What colors are standard for taxiway edge lighting versus runway edge lighting at night?","o":["Taxiway edge lights are Blue; Runway edge lights are White","Taxiway edge lights are Red; Runway edge lights are Green","Taxiway edge lights are Yellow; Runway edge lights are Purple","Taxiway edge lights are Orange; Runway edge lights are Black"],"a":0,"e":"Worldwide ICAO standard: Taxiway edges are outlined in Blue lights (centerlines Green); Runway edges are outlined in White lights."},{"id":122,"c":"Runways, Taxiways & Airfield","source":"Basics of Aviation","q":"What color lights mark the landing runway threshold (beginning of landing area) to arriving pilots?","o":["Green lights","Red lights","Blue lights","Flashing amber lights"],"a":0,"e":"Runway threshold lights appear Green to approaching landing aircraft, marking the beginning of usable landing runway (the opposite end appears Red)."},{"id":123,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What is the APU (Auxiliary Power Unit) on a commercial aircraft, and where is it normally located?","o":["A small gas turbine engine in the tail cone that provides AC electrical power and bleed air for air conditioning and engine starting when main engines are off","A backup battery pack under the cockpit seats used only for emergency cabin lighting","A supplementary rocket motor under the wings that boosts climb during high-altitude cruise","A diesel generator mounted inside the nose gear wheel well"],"a":0,"e":"The APU is a small turbine engine in the tail providing electrical power and pneumatic bleed air on the ground (and as backup in flight) without running main engines."},{"id":124,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What is a Ram Air Turbine (RAT)?","o":["An emergency deployable wind propeller that generates backup hydraulic or electrical power if all main engines fail","A cooling fan inside the cabin galley refrigerator","A turbocharger connected to the cockpit air conditioning ducts","A ground maintenance vacuum cleaner used for cleaning passenger seats"],"a":0,"e":"A Ram Air Turbine (RAT) drops from the fuselage into the slipstream to generate hydraulic and electrical power in the event of total engine or power failure."},{"id":125,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What are the two 'Black Boxes' installed on commercial aircraft, and what color are they painted?","o":["Flight Data Recorder (FDR) and Cockpit Voice Recorder (CVR); painted bright fluorescent orange","Fuel Gauge Computer and Pilot Navigation Unit; painted flat matte black","Engine Control Unit and Radar Processor; painted high-gloss silver","Cabin Entertainment Drive and Passenger Wi-Fi Server; painted deep navy blue"],"a":0,"e":"The two flight recorders (FDR and CVR) are colloquially called black boxes, but are painted fluorescent bright orange with reflective strips for search and recovery."},{"id":126,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What does the cockpit safety system 'TCAS' do?","o":["Traffic Collision Avoidance System; monitors nearby transponder-equipped aircraft and issues Resolution Advisories (RA) to prevent mid-air collisions","Turbine Climate Adjustment System; regulates cockpit cockpit heater fans","Tire Condition Automatic Sensor; monitors wheel pressure during taxi","Terminal Clearance Access System; opens the jet bridge gate door"],"a":0,"e":"TCAS (Traffic Collision Avoidance System) interrogates transponders of other aircraft nearby, issuing visual and audio Resolution Advisories (e.g., 'Climb, Climb') to prevent collision."},{"id":127,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What are the three critical takeoff 'V-Speeds' known as V1, VR, and V2?","o":["V1: Takeoff decision speed; VR: Rotation speed; V2: Takeoff safety climb speed","V1: Minimum taxi speed; VR: Reverse thrust speed; V2: Cruise speed","V1: Maximum flap retraction speed; VR: Radio check speed; V2: Vertical dive speed","V1: Cabin door locking speed; VR: Runway exit speed; V2: Cruising altitude speed"],"a":0,"e":"V1 is decision speed (beyond which takeoff must continue even with an engine failure), VR is rotation speed to lift nose, and V2 is safe engine-out climb speed."},{"id":128,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What are 'wheel chocks' and what does 'chocks on / chocks off' signal in airline schedules?","o":["Rubber or wooden blocks placed against wheels; 'Chocks on' marks flight arrival (block-in) and 'Chocks off' marks flight departure (block-out)","Metallic locks on passenger doors; signals when beverage carts can enter","Brake pads inside the landing gear; indicates when brakes are overheated","Wing covers used to protect flaps from freezing rain overnight"],"a":0,"e":"Chocks prevent wheel roll. 'Chocks on' (block-in) and 'Chocks off' (off-block) are the official industry timestamps defining flight arrival and departure block times."},{"id":129,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What does a Ground Power Unit (GPU) supply to an aircraft on the stand?","o":["Standard 115V AC electrical power at 400 Hz frequency to operate avionics and systems while engines are shutdown","High-octane gasoline for auxiliary starter spark plugs","Hydraulic fluid directly into passenger seat reclining mechanisms","Pressurized drinking water to the aircraft galley sinks"],"a":0,"e":"A Ground Power Unit (GPU) provides standard aviation 400 Hz 115V AC electricity to power aircraft electrical buses on the ground without burning jet fuel."},{"id":130,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What is an Air Start Unit (ASU) used for on the ramp?","o":["Supplies high-pressure compressed air to crank and start the jet engines if the onboard APU is inoperative","Pumps fresh filtered air into passenger pillows inside the cabin","Inflates aircraft tires to proper pressure before takeoff","Blows snow off the runway surface before an airplane lands"],"a":0,"e":"An ASU (Air Start Unit / 'air cart') provides high-pressure pneumatic airflow to spin the jet engine starter turbine when the APU bleed air is unavailable."},{"id":131,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"Why is a steering bypass pin inserted into the nose landing gear before an aircraft pushback?","o":["To disconnect the nosewheel steering hydraulics so the pushback tractor can turn the nose gear without damaging aircraft systems","To lock the nose wheels straight so the aircraft cannot turn during pushback","To ground electrical static electricity into the concrete apron","To signal to the control tower that all passenger doors are armed"],"a":0,"e":"The steering bypass pin bypasses aircraft hydraulic pressure to the nose gear steering actuators, allowing the tow tractor to steer freely without mechanical resistance."},{"id":132,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What does a ramp marshaller crossing their illuminated wands overhead in an 'X' pattern signal to the pilot?","o":["Emergency Stop immediately","All clear, proceed straight ahead","Turn sharp left into the gate","Cut all engine throttles to idle"],"a":0,"e":"Standard ICAO aircraft marshalling signal: Crossing wands or arms overhead in an 'X' is the universal signal for 'EMERGENCY STOP'."},{"id":133,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What is a Unit Load Device (ULD) in air cargo and baggage handling?","o":["A standardized container or pallet used to consolidate cargo, baggage, and mail into wide-body aircraft cargo holds","A computer scanner used by customs officers to verify passports","A mechanical lift used by disabled passengers to enter small turboprops","An electronic baggage scale built into the terminal check-in conveyor"],"a":0,"e":"A Unit Load Device (ULD, e.g., AKE, LD3, PMC) is a standardized pallet or container that locks directly into the aircraft lower and main deck cargo restraint systems."},{"id":134,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What is the difference between De-icing fluid and Anti-icing fluid applied to aircraft wings in winter?","o":["De-icing fluid (Type I) removes existing snow, ice, or frost; Anti-icing fluid (Type IV) prevents new ice from accumulating before takeoff (holdover time)","De-icing fluid is heated water only; Anti-icing fluid is pressurized oil","De-icing fluid is sprayed inside the cabin; Anti-icing fluid is sprayed on the engines","De-icing fluid is used only on helicopters; Anti-icing fluid is used only on wide-body jets"],"a":0,"e":"De-icing (usually heated Type I glycol/water) removes frozen contamination; Anti-icing (viscous Type IV) adheres to wings to prevent ice buildup until takeoff rotation."},{"id":135,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What is Maximum Takeoff Weight (MTOW)?","o":["The maximum certified gross weight at which an aircraft is legally permitted to begin its takeoff run","The weight of an aircraft when all fuel tanks are completely empty","The total weight of passengers and their baggage excluding the airplane","The maximum weight allowed to be stored in the overhead luggage lockers"],"a":0,"e":"MTOW (Maximum Takeoff Weight) is the structural maximum gross weight authorized for flight at the start of the takeoff run."},{"id":136,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"What does the term aviation mean?","o":["The art or science of flying","The study of sea transportation","The operation of road vehicles","The science of railway systems"],"a":0,"e":"The presentation defines aviation as the art or science of flying."},{"id":137,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"Which description best defines an airport in the presentation?","o":["A land aerodrome with facilities for passengers, baggage and cargo","A building used only for aircraft maintenance","A place used only by military aircraft","A facility used only for air traffic control"],"a":0,"e":"An airport is a land aerodrome with extended facilities for transporting passengers, baggage and cargo."},{"id":138,"c":"Aviation Basics & Principles","source":"Ground Handling PPT","q":"Which of these is listed as a type of airport?","o":["STOL airport","Railway airport","Submarine airport","Highway airport"],"a":0,"e":"STOL means Short Take-Off and Landing; STOL airports are listed in the presentation."},{"id":139,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What is the main body of an aircraft called?","o":["Fuselage","Empennage","Aileron","Apron"],"a":0,"e":"The fuselage is the main body and holds passengers, cargo and crew."},{"id":140,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What is the main function of aircraft wings?","o":["Provide lift","Provide cabin lighting","Store passenger luggage","Control cabin temperature"],"a":0,"e":"Air flowing over the wings creates lift, helping the aircraft stay in the air."},{"id":141,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"Where do pilots control the aircraft?","o":["Cockpit or flight deck","Cargo compartment","Passenger galley","Landing gear bay"],"a":0,"e":"The cockpit, also called the flight deck, contains flight controls, instruments and navigation systems."},{"id":142,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"Which aircraft part supports the aircraft during takeoff and landing?","o":["Landing gear","Rudder","Flaps","Fuselage"],"a":0,"e":"Landing gear supports the aircraft on the ground and absorbs shock during landing."},{"id":143,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What do aircraft engines provide?","o":["Thrust","Baggage capacity","Passenger seating","Lift directly from the tail"],"a":0,"e":"Engines provide thrust to move the aircraft forward."},{"id":144,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"Which control surface controls roll?","o":["Ailerons","Elevators","Rudder","Flaps"],"a":0,"e":"Ailerons on the wings control rolling left or right."},{"id":145,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"Which control surface controls pitch?","o":["Elevators","Rudder","Ailerons","Slats"],"a":0,"e":"Elevators on the tail control the aircraft's climbing or descending tilt (pitch)."},{"id":146,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"Which control surface controls yaw?","o":["Rudder","Ailerons","Elevators","Flaps"],"a":0,"e":"The rudder on the vertical tail controls left/right direction (yaw)."},{"id":147,"c":"Aircraft Systems & Control Surfaces","source":"Ground Handling PPT","q":"What is the function of flaps and slats?","o":["Increase lift at low speeds","Reduce passenger capacity","Control the landing gear","Provide engine thrust"],"a":0,"e":"Flaps and slats help during takeoff and landing by increasing lift at low speeds."},{"id":148,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"Which aircraft layout has a single aisle?","o":["Narrow-body","Wide-body","Twin-rotor","Dedicated freighter"],"a":0,"e":"Narrow-body aircraft are single-aisle aircraft, such as the Boeing 737 and Airbus A320."},{"id":149,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"Which aircraft layout usually has two aisles?","o":["Wide-body","Narrow-body","Light aircraft","Regional turboprop only"],"a":0,"e":"Wide-body aircraft have twin aisles and larger passenger and cargo capacity."},{"id":150,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"Which manufacturer is based in Brazil according to the presentation?","o":["Embraer","Boeing","Airbus","Bombardier"],"a":0,"e":"The presentation lists Embraer as a Brazilian aircraft manufacturer."},{"id":151,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"What are regional jets mainly used for?","o":["Short regional routes with fewer passengers","Long-haul cargo-only routes","Military combat missions","Vertical takeoff and hovering"],"a":0,"e":"Regional jets such as the Embraer E190 operate on short regional routes."},{"id":152,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"What does P2F mean in cargo aviation?","o":["Passenger to Freighter","Pilot to Flight","Plane to Fuel","Passenger to First class"],"a":0,"e":"P2F refers to passenger aircraft converted for freighter operations."},{"id":153,"c":"Aircraft Types & Configurations","source":"Ground Handling PPT","q":"Which aircraft type can hover and take off vertically?","o":["Helicopter","Narrow-body jet","Wide-body jet","Glider"],"a":0,"e":"Helicopters are rotary-wing aircraft used for vertical takeoff, landing and hovering."},{"id":154,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"What are the three main areas of an airport listed in the presentation?","o":["Landside, terminal and airside","Runway, hangar and control room","Check-in, galley and cockpit","Cargo, hotel and parking"],"a":0,"e":"The three main airport areas are landside, terminal and airside."},{"id":155,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"Which airport area is described as unrestricted?","o":["Landside","Airside","Runway","Apron"],"a":0,"e":"Landside is the unrestricted area accessible to travelling and non-travelling people."},{"id":156,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"What is the main purpose of an airport terminal building?","o":["Processing passengers, baggage and cargo","Parking aircraft overnight only","Controlling aircraft in flight","Manufacturing aircraft parts"],"a":0,"e":"The terminal is where passengers, baggage and cargo are processed between surface and air transport."},{"id":157,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"Which area is the secured, restricted movement area of an airport?","o":["Airside","Landside","Public car park","Ticket office"],"a":0,"e":"Airside is the secured and restricted area where aircraft operations take place."},{"id":158,"c":"Airport Facilities & Areas","source":"Ground Handling PPT","q":"Which of these is an airside facility?","o":["Taxiway","Public shopping street","Hotel lobby","Railway platform"],"a":0,"e":"Taxiways are part of the airside area, along with runways, aprons and stands."},{"id":159,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What is the full form of ICAO?","o":["International Civil Aviation Organization","International Cargo Airline Office","Indian Civil Airport Organization","International Cabin Aviation Office"],"a":0,"e":"ICAO stands for International Civil Aviation Organization."},{"id":160,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What is the full form of IATA?","o":["International Air Transport Association","International Airport Travel Office","Indian Air Transport Authority","International Aircraft Technical Association"],"a":0,"e":"IATA stands for International Air Transport Association."},{"id":161,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"In which year was ICAO founded, according to the presentation?","o":["1945","1919","1991","2001"],"a":0,"e":"The presentation gives 1945 as ICAO's foundation year."},{"id":162,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What is the main activity area of IATA described in the presentation?","o":["Commercial","Military","Agricultural","Airport construction"],"a":0,"e":"The presentation identifies IATA's activity area as commercial."},{"id":163,"c":"Regulatory Authorities & ICAO/IATA","source":"Ground Handling PPT","q":"What is a National Aviation Authority (NAA)?","o":["A government body regulating civil aviation in a country","A private airline ticketing company","An aircraft manufacturer","A passenger assistance association"],"a":0,"e":"An NAA oversees and regulates civil aviation within a specific country."},{"id":164,"c":"Ground Handling Operations","source":"Ground Handling PPT","q":"What is ground handling?","o":["Services supporting aircraft and passengers while the aircraft is on the ground","The process of designing aircraft wings","The process of flying an aircraft","The construction of airport runways"],"a":0,"e":"Ground handling supports aircraft and passengers on the ground, especially between flights."},{"id":165,"c":"Ground Handling Operations","source":"Ground Handling PPT","q":"Which is a main component of ground handling?","o":["Passenger services","Aircraft manufacturing","Pilot recruitment","Airline advertising"],"a":0,"e":"Passenger services are one of the main components of ground handling."},{"id":166,"c":"Ground Handling Operations","source":"Ground Handling PPT","q":"Which company is given as an example of a ground handling provider?","o":["Swissport","Airbus","Embraer","ICAO"],"a":0,"e":"Swissport is listed as an example of a third-party ground handling provider."},{"id":167,"c":"Ground Handling Operations","source":"Ground Handling PPT","q":"Why are efficient ground handling services important?","o":["They support on-time performance and safe aircraft turnaround","They replace air traffic control","They remove the need for flight crew","They manufacture aircraft"],"a":0,"e":"Ground handling supports punctuality, safety, passenger experience and efficient turnaround."},{"id":168,"c":"Reservations & Ticketing","source":"Ground Handling PPT","q":"What is a reservation in aviation?","o":["Booking a seat for a particular date, time and route","Issuing a baggage tag","Checking a passenger's visa at arrival","Loading cargo into an aircraft"],"a":0,"e":"A reservation is the process of booking an aircraft seat for a specific journey."},{"id":169,"c":"Reservations & Ticketing","source":"Ground Handling PPT","q":"What is ticketing?","o":["Issuing a travel document confirming a booking","Assigning a runway to an aircraft","Weighing checked baggage","Screening cargo"],"a":0,"e":"Ticketing issues the travel document that confirms the booking and authorizes travel."},{"id":170,"c":"Reservations & Ticketing","source":"Ground Handling PPT","q":"Which is a channel for reservation and ticketing?","o":["Global Distribution System (GDS)","Aircraft pushback tractor","Belt loader","Runway lighting"],"a":0,"e":"GDS is listed as one of the reservation and ticketing channels."},{"id":171,"c":"Reservations & Ticketing","source":"Ground Handling PPT","q":"Which step comes after payment in the reservation system workflow?","o":["Issuance of e-ticket","Aircraft pushback","Baggage unloading","Immigration interview"],"a":0,"e":"The workflow includes flight search, selection and booking, fare calculation, payment and e-ticket issuance."},{"id":172,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"Which task is performed by check-in staff?","o":["Verifying travel documents","Controlling aircraft engines","Issuing pilot licences","Directing aircraft in flight"],"a":0,"e":"Check-in staff greet passengers and verify their travel documents."},{"id":173,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What is usually issued to a passenger during check-in?","o":["Boarding pass","Air Waybill","Cargo manifest","Load control licence"],"a":0,"e":"Check-in staff check in passengers and issue boarding passes."},{"id":174,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What do check-in staff do with checked baggage?","o":["Weigh, tag and send it to the sorting system","Place it in the cockpit","Give it directly to the pilot","Send it through immigration"],"a":0,"e":"The presentation lists weighing, tagging and sending checked baggage to the sorting system."},{"id":175,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"Which is a challenge during check-in?","o":["Handling excess baggage","Designing aircraft engines","Repairing airport runways","Issuing pilot licences"],"a":0,"e":"Excess baggage and invalid documents are among the challenges faced by check-in staff."},{"id":176,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What is the purpose of pre-boarding activities?","o":["Prepare for a smooth, safe and efficient boarding process","Unload cargo after arrival","Perform aircraft manufacturing","Issue visas to passengers"],"a":0,"e":"Pre-boarding includes gate preparation, document checks, announcements and coordination."},{"id":177,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"Which activity is part of boarding procedures?","o":["Passenger verification","Aircraft painting","Cargo booking for another flight","Pilot medical examination"],"a":0,"e":"Passenger verification is one of the listed boarding procedure steps."},{"id":178,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"Which is a common challenge during boarding?","o":["Overhead bin space becoming full","Aircraft design changes","Airport construction permits","Pilot recruitment"],"a":0,"e":"The presentation lists full overhead bin space as a boarding challenge."},{"id":179,"c":"Passenger Handling & Boarding","source":"Ground Handling PPT","q":"What is arrival handling?","o":["Managing passengers and baggage from landing until passengers exit the airport","Booking seats before departure","Preparing an aircraft for manufacturing","Issuing airline staff uniforms"],"a":0,"e":"Arrival handling covers the process from aircraft landing until passengers leave the airport."},{"id":180,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does PRM stand for?","o":["Persons with Reduced Mobility","Passenger Ramp Manager","Priority Reservation Member","Passenger Route Map"],"a":0,"e":"PRM means Persons with Reduced Mobility."},{"id":181,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does UMNR refer to?","o":["Unaccompanied Minors","Unclaimed Missing Reservations","Urgent Medical Needs Record","United Member Number"],"a":0,"e":"UMNR refers to unaccompanied minors who require assistance while travelling."},{"id":182,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"Which code is used for a stretcher case in the presentation?","o":["STCR","OXYG","DEPA","WCHR"],"a":0,"e":"STCR is the code for a stretcher case."},{"id":183,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"Which code indicates oxygen is required?","o":["OXYG","MEDA","DEPU","WCHS"],"a":0,"e":"OXYG indicates that oxygen is required."},{"id":184,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"What does DEPU mean?","o":["Deportee – Unaccompanied","Deportee – Accompanied","Departure – Unconfirmed","Denied Entry – Priority"],"a":0,"e":"DEPU means a deportee travelling without an escort."},{"id":185,"c":"Special Category Passengers (SCP)","source":"Ground Handling PPT","q":"Which may be a reason for INAD status?","o":["Invalid or missing visa","Having a window seat","Travelling with hand baggage","Checking in online"],"a":0,"e":"An invalid or missing visa is one of the common reasons listed for INAD status."},{"id":186,"c":"Check-in & Passenger Types","source":"Ground Handling PPT","q":"Which of these is a type of check-in?","o":["Self check-in","Engine check-in","Runway check-in","Cabin crew check-in"],"a":0,"e":"Self check-in is one of the check-in types listed in the presentation."},{"id":187,"c":"Check-in & Passenger Types","source":"Ground Handling PPT","q":"Which passenger category is based on class of service?","o":["Economy Class","No-show","Go-show","Standby"],"a":0,"e":"Economy Class is one of the service classes listed, alongside First, Business and Premium Economy."},{"id":188,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"What are the two primary baggage allowance systems mentioned?","o":["Weight concept and piece concept","Cabin concept and cargo concept","Manual concept and online concept","Arrival concept and departure concept"],"a":0,"e":"The presentation explains baggage acceptance through the weight concept and piece concept."},{"id":189,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"What is the weight concept?","o":["Allowance based on total baggage weight","Allowance based only on the number of bags","Allowance based on passenger age","Allowance based on flight duration"],"a":0,"e":"Under the weight concept, the total permitted weight matters regardless of the number of bags."},{"id":190,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"What is the piece concept?","o":["Allowance based on a permitted number of bags, each with limits","Allowance based only on total passenger weight","Allowance based on the number of passengers","Allowance based on the aircraft's age"],"a":0,"e":"The piece concept specifies a number of bags, with weight and size restrictions for each."},{"id":191,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"What is the typical maximum single checked-bag weight mentioned in the presentation?","o":["32 kg","12 kg","18 kg","45 kg"],"a":0,"e":"The presentation mentions 32 kg (70 lbs) as a typical maximum for one checked bag, though airlines may set lower limits."},{"id":192,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"What does CBBG stand for?","o":["Cabin Seat Baggage","Checked Baggage Group","Cargo Booking Guide","Cabin Boarding Gate"],"a":0,"e":"CBBG means Cabin Seat Baggage, which may include items such as musical instruments or valuable equipment."},{"id":193,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"Which item is given as an example of Cabin Seat Baggage?","o":["Musical instrument","Ordinary checked suitcase","Aircraft tyre","Fuel container"],"a":0,"e":"Musical instruments are among the examples of CBBG in the presentation."},{"id":194,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"Which baggage tag is listed in the presentation?","o":["Priority tag","Pilot tag","Runway tag","Engine tag"],"a":0,"e":"Priority tags are included in the presentation's list of baggage tags."},{"id":195,"c":"Baggage Acceptance & Tags","source":"Ground Handling PPT","q":"Which security question should staff ask when accepting a bag?","o":["Have you packed your bag?","Did you build this aircraft?","Do you know the pilot?","Have you visited this airport before?"],"a":0,"e":"The presentation includes asking passengers whether they packed their own bag."},{"id":196,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What does airside operations cover?","o":["Activities in the secure area including runways, taxiways and aprons","Only public transport outside the airport","Only airline ticket sales","Only passenger shopping areas"],"a":0,"e":"Airside operations take place in the secure aircraft movement areas of the airport."},{"id":197,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What is ramp operation concerned with?","o":["Activities around aircraft on the ground","Passenger hotel reservations","Aircraft manufacturing","Visa application processing"],"a":0,"e":"Ramp operations include parking, loading, refuelling, servicing and pushback."},{"id":198,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What is pushback?","o":["Moving an aircraft back from the gate using a tug or tractor","Moving baggage onto a carousel","Pushing passengers through security","Moving cargo into a warehouse"],"a":0,"e":"After servicing and boarding, a tug or tractor pushes the aircraft back from the gate."},{"id":199,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"Which equipment is used to move an aircraft during pushback?","o":["Pushback tractor","Baggage scale","X-ray machine","Passenger bridge"],"a":0,"e":"A tug or pushback tractor is used to push the aircraft away from the gate."},{"id":200,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What does PPE stand for in ramp safety?","o":["Personal Protective Equipment","Passenger Processing Entry","Plane Parking Equipment","Pilot Protection Examination"],"a":0,"e":"PPE is listed among key safety protocols for ramp operations."},{"id":201,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"What does FOD refer to in ramp safety?","o":["Foreign Object Debris","Flight Operations Data","Fuel Order Document","Final Operations Duty"],"a":0,"e":"FOD means Foreign Object Debris, which can damage aircraft or engines."},{"id":202,"c":"Ramp Operations & GSE","source":"Ground Handling PPT","q":"Why are efficient ramp operations important?","o":["They reduce aircraft turnaround time","They eliminate the need for runways","They replace passenger check-in","They remove all flight delays"],"a":0,"e":"Efficient ramp operations reduce turnaround time and support punctuality and aircraft utilization."},{"id":203,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"What does AWB stand for?","o":["Air Waybill","Airport Weight Balance","Aircraft Work Book","Airline Waiting Bay"],"a":0,"e":"An Air Waybill is a cargo transport document."},{"id":204,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"Which document is included in cargo documentation?","o":["Cargo manifest","Passenger boarding pass","Pilot licence","Cabin crew roster"],"a":0,"e":"Cargo documentation can include Air Waybills, cargo manifests and customs declarations."},{"id":205,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"What may be used to screen cargo for security?","o":["X-ray screening","Seat selection system","Boarding gate display","Cabin interphone"],"a":0,"e":"Cargo may be screened using security methods such as X-ray screening."},{"id":206,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"How can cargo be tracked through an airport?","o":["Barcode scanners or RFID tags","Cabin seat numbers","Passenger passport stamps","Runway markings"],"a":0,"e":"The presentation mentions barcode scanners and RFID tags for cargo tracking."},{"id":207,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"Which is listed as a special cargo type?","o":["Perishable cargo","Passenger cabin crew","Airport signage","Aircraft seating"],"a":0,"e":"Perishable cargo, dangerous goods and live animals are listed as special cargo types."},{"id":208,"c":"Air Cargo & Dangerous Goods","source":"Ground Handling PPT","q":"What does DGR refer to in the presentation?","o":["IATA Dangerous Goods Regulations","Departure Gate Record","Domestic Ground Route","Daily General Report"],"a":0,"e":"DGR refers to IATA's Dangerous Goods Regulations."},{"id":209,"c":"Aviation Security (AVSEC)","source":"Ground Handling PPT","q":"What is the purpose of aviation security?","o":["Safeguarding civil aviation against acts of unlawful interference","Increasing aircraft speed","Managing airline ticket prices","Improving aircraft cabin entertainment"],"a":0,"e":"The presentation defines aviation security as safeguarding civil aviation against unlawful interference."},{"id":210,"c":"Aviation Security (AVSEC)","source":"Ground Handling PPT","q":"Which is a key aspect of ground handling security?","o":["Access control","Seat upgrades","Meal selection","Frequent flyer points"],"a":0,"e":"Access control is one of the listed aspects of security operations."},{"id":211,"c":"Aviation Security (AVSEC)","source":"Ground Handling PPT","q":"Which item is included in security operations?","o":["Passenger screening","Aircraft advertising","Hotel check-in","Ticket refund processing"],"a":0,"e":"Passenger screening is one of the key aspects of security operations."},{"id":212,"c":"Aviation Careers & Industry Trends","source":"Ground Handling PPT","q":"Which is a career area in ground operations?","o":["Passenger services","Ship navigation","Railway signalling","Road construction"],"a":0,"e":"Passenger services is one of the career areas listed in the presentation."},{"id":213,"c":"Aviation Careers & Industry Trends","source":"Ground Handling PPT","q":"Which skill group is mentioned for ground operations candidates?","o":["Customer service skills","Marine engineering skills","Road racing skills","Hotel cooking skills"],"a":0,"e":"The presentation lists customer service, soft skills and technical skills."},{"id":214,"c":"Aviation Careers & Industry Trends","source":"Ground Handling PPT","q":"Which technology trend is mentioned in the aviation industry section?","o":["Artificial intelligence and machine learning","Steam railway engines","Underwater navigation","Coal-powered aircraft"],"a":0,"e":"The presentation mentions AI and machine learning alongside autonomous aircraft and drones."},{"id":215,"c":"Aviation Careers & Industry Trends","source":"Ground Handling PPT","q":"Which sustainability trend is mentioned?","o":["Sustainable aviation fuels","Increasing carbon emissions","Replacing airports with seaports","Removing all regional flights"],"a":0,"e":"The presentation mentions green aviation, sustainable fuels and carbon-emission reduction."},{"id":216,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"What does an aircraft's Mach number measure?","o":["The ratio of the aircraft's true airspeed to the local speed of sound","The engine thrust output measured in thousands of pounds","The rate of climb measured in feet per minute","The angle of the wings relative to the runway surface"],"a":0,"e":"Mach number (named after Ernst Mach) is the ratio of aircraft speed to the speed of sound in the surrounding air (Mach 1.0 = speed of sound)."},{"id":217,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"What is the aerodynamic purpose of winglets installed at the tips of aircraft wings?","o":["Reduce induced drag by weakening wingtip vortices, improving fuel efficiency","Act as emergency fuel dump nozzles during overweight landings","Provide additional radar reflectivity for air traffic control tracking","Store auxiliary oxygen bottles for passenger cabin use"],"a":0,"e":"Winglets reduce induced drag by minimizing the high-pressure air curling over the wingtips into wingtip vortices, saving 3-5% fuel."},{"id":218,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"What aerodynamic phenomenon is known as 'Ground Effect'?","o":["Increased lift and reduced induced drag when an aircraft flies within approximately one wingspan of the runway surface","Turbulence created by jet engines striking the tarmac during taxi","The suction effect that pulls aircraft tires toward runway water puddles","The sudden loss of engine thrust when rolling over airport arrestor beds"],"a":0,"e":"Ground effect occurs when an aircraft flies close to the surface (within one wingspan), reducing 3D airflow and wingtip vortices, resulting in higher lift and lower drag."},{"id":219,"c":"Aviation Basics & Principles","source":"Basics of Aviation","q":"What is 'Ground Speed' (GS) in aircraft navigation?","o":["The actual horizontal speed of the aircraft relative to the ground surface (True Airspeed corrected for wind)","The maximum taxi speed allowed on airport taxiways","The speed of the aircraft wheels when touching the runway","The speed of air flowing through the jet engine bypass ducts"],"a":0,"e":"Ground Speed is the aircraft's true speed across the earth's surface; a tailwind increases ground speed, while a headwind decreases it."},{"id":220,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What do the pitot tube and static ports measure on an aircraft?","o":["Pitot tube measures dynamic (ram) air pressure; Static ports measure ambient atmospheric pressure","Pitot tube measures cabin oxygen; Static ports measure fuel tank levels","Pitot tube measures hydraulic fluid; Static ports measure engine oil temperature","Pitot tube measures passenger cabin pressure; Static ports measure wing de-icing heat"],"a":0,"e":"The pitot-static system uses the pitot tube (ram air) and static ports (ambient pressure) to operate the Airspeed Indicator, Altimeter, and Vertical Speed Indicator."},{"id":221,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What is the purpose of an aircraft's flashing red beacon light?","o":["Warns ground personnel that the engines are running or about to be started, or that the aircraft is in motion","Signals that the aircraft is carrying VIP passengers or heads of state","Indicates that the aircraft requires emergency medical services on the runway","Marks the location of the passenger emergency exit doors"],"a":0,"e":"The red anti-collision beacon is switched on immediately before engine start to warn all personnel on the ramp to stay clear of running engines and moving aircraft."},{"id":222,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What is a Fly-By-Wire (FBW) flight control system?","o":["A system that converts pilot control inputs into electronic signals processed by flight computers that move hydraulic actuators","A mechanical system using physical steel cables and pulleys exclusively to move control surfaces","An emergency wireless radio connecting the cockpit to the ground maintenance hangar","A passenger entertainment system streaming video directly to seatback monitors"],"a":0,"e":"Fly-by-wire replaces mechanical cables with an electronic interface: computers interpret pilot inputs and move flight control surfaces automatically within safe flight envelopes."},{"id":223,"c":"Aircraft Systems & Control Surfaces","source":"Basics of Aviation","q":"What is the function of spoilers (speedbrakes) on an aircraft wing?","o":["Disrupt (spoil) lift and increase drag to slow down the aircraft in flight and dump lift upon touchdown for maximum wheel braking","Increase wing camber to generate extra lift at slow speeds during takeoff","Deflect crosswinds away from the vertical stabilizer during landing flare","Direct warm bleed air over the wing leading edge to prevent ice formation"],"a":0,"e":"Spoilers spoil lift: deployed in flight to descend without gaining speed, and extended fully on touchdown to dump lift and transfer aircraft weight to the wheels for powerful braking."},{"id":224,"c":"Runways, Taxiways & Airfield","source":"Basics of Aviation","q":"What is an ILS (Instrument Landing System)?","o":["A ground-based precision approach system providing horizontal guidance (localizer) and vertical guidance (glide slope) to landing aircraft","An automated baggage barcode sorting system installed beneath airport terminal floors","A computer algorithm used by airline revenue managers to adjust ticket prices","A radar device inside the cockpit measuring the distance to clouds ahead"],"a":0,"e":"ILS provides precision radio guidance: the Localizer provides runway centerline alignment and the Glide Slope provides vertical 3-degree descent guidance."},{"id":225,"c":"Runways, Taxiways & Airfield","source":"Basics of Aviation","q":"What does a 'Displaced Threshold' on a runway mean?","o":["A runway portion usable for takeoff and landing rollout, but not allowed for initial touchdown when landing","A runway that has been permanently closed and marked with large yellow X symbols","A runway reserved exclusively for military supersonic fighter aircraft","An unpaved grass strip located between two parallel concrete runways"],"a":0,"e":"A displaced threshold is marked with white arrows pointing to the threshold line; it is available for takeoff roll and landing rollout from the opposite direction, but not for landing touchdown."},{"id":226,"c":"Runways, Taxiways & Airfield","source":"Basics of Aviation","q":"What does a large yellow 'X' marked at both ends of a runway signify?","o":["The runway is closed and unsafe for all aircraft operations","The runway is reserved exclusively for helicopter vertical landings","The runway is equipped with an automated precision arrestor cable","The runway has an elevation higher than 5,000 feet above sea level"],"a":0,"e":"Large yellow Xs placed on runway ends or along its surface indicate that the runway is closed to all aircraft operations."},{"id":227,"c":"Air Traffic Control & Emergencies","source":"Basics of Aviation","q":"What is a 'Go-Around' (Missed Approach)?","o":["An aborted landing procedure where the pilot increases thrust, climbs away from the runway, and sets up for another approach","A procedure where an aircraft taxis around the terminal building twice before parking","A circular flight path flown while waiting for an available boarding gate","A maneuver where an aircraft turns 180 degrees on the runway after landing"],"a":0,"e":"A go-around is a standard safety procedure executed when a landing approach cannot be safely completed (e.g., runway obstruction, unstable approach, wind shear)."},{"id":228,"c":"Air Traffic Control & Emergencies","source":"Basics of Aviation","q":"What does the abbreviation 'ETOPS' mean in commercial aviation?","o":["Extended-range Twin-engine Operational Performance Standards","Emergency Terminal Operations and Passenger Safety","Electronic Takeoff Power Setting","En-route Traffic Optimization and Positioning System"],"a":0,"e":"ETOPS allows twin-engine commercial airliners (like the B777, B787, A350) to fly long-distance routes that are hours away from the nearest suitable diversion airport."},{"id":229,"c":"Air Traffic Control & Emergencies","source":"Basics of Aviation","q":"What is 'Wake Turbulence', and when is it most intense?","o":["Vortices trailing behind aircraft generating lift; most intense behind heavy, clean (gear/flaps up), and slow aircraft","Exhaust gas turbulence created only when jet engines operate in reverse thrust mode","Choppy airflow caused by passengers walking inside the aircraft cabin during turbulence","Shockwaves created when supersonic fighter jets fly below 1,000 feet altitude"],"a":0,"e":"Wake turbulence is caused by wingtip vortices created whenever a wing generates lift; it is strongest when the generating aircraft is Heavy, Clean, and Slow."},{"id":230,"c":"Aviation Atmosphere & Weather","source":"Basics of Aviation","q":"What is 'Wind Shear', and why is it especially hazardous during takeoff and landing?","o":["A sudden, drastic change in wind speed and/or direction over a short distance, which can cause an abrupt loss of airspeed and lift","A steady headwind that gently slows an aircraft down on final approach","The cooling of aircraft fuel inside the wing tanks due to high-altitude subzero temperatures","The sound produced by wind whistling over the cockpit windshield"],"a":0,"e":"Wind shear is a rapid change in wind velocity/direction. Low-level wind shear and microbursts can cause catastrophic loss of airspeed and lift near the ground."},{"id":231,"c":"Aviation Atmosphere & Weather","source":"Basics of Aviation","q":"What physiological condition occurs when the human body is deprived of adequate oxygen at high altitudes?","o":["Hypoxia","Hyperthermia","Hydroplaning","Hypertension"],"a":0,"e":"Hypoxia is the dangerous deficiency of oxygen in body tissues at high altitudes, impairing judgment, motor skills, and consciousness unless supplemental oxygen is provided."},{"id":232,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What is the danger zone known as the 'Engine Ingestion Hazard Zone'?","o":["The area in front of and around a running jet engine where suction is powerful enough to suck personnel or equipment into the engine intake","The area behind the aircraft tail where baggage carts are parked","The space directly underneath the passenger cabin floor","The fuel delivery port located under the outer wingtip"],"a":0,"e":"Running jet engines create massive suction in front of the inlet (ingestion zone) and extreme high-velocity hot blast behind the exhaust (jet blast zone)."},{"id":233,"c":"Ramp Operations & GSE","source":"Basics of Aviation","q":"What is the function of an aircraft potable water servicing truck on the ramp?","o":["Replenishes safe, sanitized drinking water used for passenger handwashing, coffee/tea makers, and galley sinks","Flushes and empties the chemical waste holding tanks from aircraft lavatories","Sprays glycol fluid over aircraft wings to melt frozen morning frost","Pumps coolant directly into the aircraft air conditioning heat exchangers"],"a":0,"e":"Potable water service trucks fill the aircraft's onboard clean drinking water tanks under strict hygiene protocols, completely separated from lavatory waste service."}];
+
+// State Management
+let deck = [];
+let deckIndex = 0;
+let currentQuestion = null;
+let isAnswerLocked = false;
+let sessionStats = {
+  correct: 0,
+  attempted: 0,
+  streak: 0,
+  bestStreak: parseInt(localStorage.getItem('aeroquest_best_streak') || '0', 10),
+  categoryMastery: {} // { catName: { correct: 0, attempted: 0 } }
+};
+let soundEnabled = localStorage.getItem('aeroquest_sound') !== 'false';
+let bookmarks = new Set(JSON.parse(localStorage.getItem('aeroquest_bookmarks') || '[]'));
+let activeSource = 'ALL';
+let activeCategory = 'ALL';
+let activeMode = 'infinite'; // 'infinite', 'exam', 'bookmarks'
+let examTargetCount = 50;
+
+// Audio Synthesizer (Web Audio API)
+let audioCtx = null;
+function getAudioContext() {
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) audioCtx = new AudioContext();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function playTone(type) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    
+    if (type === 'correct') {
+      // Pleasant high major triad chord
+      [523.25, 659.25, 783.99].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.06);
+        gain.gain.setValueAtTime(0.08, now + i * 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.06 + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.06);
+        osc.stop(now + i * 0.06 + 0.35);
+      });
+    } else if (type === 'wrong') {
+      // Low dual buzz
+      [220, 185].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now + i * 0.08);
+        gain.gain.setValueAtTime(0.06, now + i * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 0.25);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.08);
+        osc.stop(now + i * 0.08 + 0.25);
+      });
+    }
+  } catch (err) {
+    console.warn('Audio play failed:', err);
+  }
+}
+
+// Helpers
+const $ = id => document.getElementById(id);
+const shuffle = arr => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+// Populate Categories Dropdown
+function initCategories() {
+  const cats = {};
+  BANK.forEach(q => { cats[q.c] = (cats[q.c] || 0) + 1; });
+  const select = $('catSelect');
+  select.innerHTML = '<option value="ALL">🌐 All Categories (19 Topics - ' + BANK.length + ' Questions)</option>';
+  Object.keys(cats).sort().forEach(cat => {
+    const opt = document.createElement('option');
+    opt.value = cat;
+    opt.textContent = `${cat} (${cats[cat]})`;
+    select.appendChild(opt);
+  });
+}
+
+// Deck Building & Filtering
+function buildDeck() {
+  let pool = BANK;
+  
+  if (activeMode === 'bookmarks') {
+    pool = pool.filter(q => bookmarks.has(q.id));
+    if (pool.length === 0) {
+      alert('You have no bookmarked questions! Switching back to Infinite Mode.');
+      setMode('infinite');
+      return;
+    }
+  } else {
+    if (activeSource !== 'ALL') {
+      pool = pool.filter(q => q.source === activeSource);
+    }
+    if (activeCategory !== 'ALL') {
+      pool = pool.filter(q => q.c === activeCategory);
+    }
+  }
+
+  deck = shuffle(pool);
+  deckIndex = 0;
+  if (activeMode === 'exam') {
+    deck = deck.slice(0, Math.min(examTargetCount, deck.length));
+  }
+}
+
+// Render Next Question
+function nextQuestion() {
+  if (deck.length === 0 || deckIndex >= deck.length) {
+    if (activeMode === 'exam') {
+      showExamCompletion();
+      return;
+    }
+    buildDeck();
+  }
+
+  currentQuestion = deck[deckIndex++];
+  isAnswerLocked = false;
+
+  // Badges & Counter
+  $('catBadge').textContent = currentQuestion.c.toUpperCase();
+  $('sourceBadge').textContent = currentQuestion.source.toUpperCase();
+  
+  if (activeMode === 'exam') {
+    $('qCounter').textContent = `Exam Question ${deckIndex} of ${deck.length}`;
+    $('progressBar').style.width = `${Math.round((deckIndex / deck.length) * 100)}%`;
+  } else {
+    $('qCounter').textContent = `Question ${sessionStats.attempted + 1} (Card ${deckIndex}/${deck.length})`;
+    $('progressBar').style.width = `${Math.round((deckIndex / deck.length) * 100)}%`;
+  }
+
+  // Star status
+  $('starBtn').textContent = bookmarks.has(currentQuestion.id) ? '★' : '☆';
+  $('starBtn').className = bookmarks.has(currentQuestion.id) ? 'btn-star starred' : 'btn-star';
+
+  // Question Title
+  $('qTitle').textContent = currentQuestion.q;
+
+  // Reset feedback & Next button
+  $('feedbackBox').className = 'feedback-box';
+  $('feedbackBox').innerHTML = '';
+  $('nextBtn').disabled = true;
+  $('nextBtn').innerHTML = 'Next Question → <span class="kbd-badge">[Space]</span>';
+
+  // Build shuffled options
+  const correctOptionText = currentQuestion.o[currentQuestion.a];
+  const optionObjects = currentQuestion.o.map((opt, i) => ({
+    text: opt,
+    isCorrect: i === currentQuestion.a
+  }));
+  const shuffledOptions = shuffle(optionObjects);
+
+  const grid = $('optionsGrid');
+  grid.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+
+  shuffledOptions.forEach((optObj, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `
+      <span class="option-letter">${letters[idx]}</span>
+      <span class="option-text">${optObj.text}</span>
+      <span class="option-key">[${idx + 1}]</span>
+    `;
+    btn.addEventListener('click', () => handleAnswer(btn, optObj, correctOptionText));
+    grid.appendChild(btn);
+  });
+}
+
+// Answer Selection
+function handleAnswer(selectedBtn, optObj, correctText) {
+  if (isAnswerLocked) return;
+  isAnswerLocked = true;
+  sessionStats.attempted++;
+
+  // Category tracking
+  const cat = currentQuestion.c;
+  if (!sessionStats.categoryMastery[cat]) {
+    sessionStats.categoryMastery[cat] = { correct: 0, attempted: 0 };
+  }
+  sessionStats.categoryMastery[cat].attempted++;
+
+  const buttons = Array.from($('optionsGrid').children);
+  buttons.forEach(b => {
+    b.disabled = true;
+    const txt = b.querySelector('.option-text').textContent;
+    if (txt === correctText) {
+      b.classList.add('correct');
+    }
+  });
+
+  const fbBox = $('feedbackBox');
+  if (optObj.isCorrect) {
+    sessionStats.correct++;
+    sessionStats.streak++;
+    sessionStats.categoryMastery[cat].correct++;
+    if (sessionStats.streak > sessionStats.bestStreak) {
+      sessionStats.bestStreak = sessionStats.streak;
+      localStorage.setItem('aeroquest_best_streak', sessionStats.bestStreak.toString());
+    }
+    playTone('correct');
+
+    fbBox.className = 'feedback-box show good';
+    fbBox.innerHTML = `
+      <div class="feedback-title">✓ Correct! Excellent job.</div>
+      <div class="feedback-explain">${currentQuestion.e}</div>
+    `;
+  } else {
+    sessionStats.streak = 0;
+    selectedBtn.classList.add('wrong');
+    playTone('wrong');
+
+    fbBox.className = 'feedback-box show bad';
+    fbBox.innerHTML = `
+      <div class="feedback-title">✕ Not quite. Correct answer: <strong>${correctText}</strong></div>
+      <div class="feedback-explain">${currentQuestion.e}</div>
+    `;
+  }
+
+  $('nextBtn').disabled = false;
+  updateStatsDisplay();
+}
+
+// Update Stats UI
+function updateStatsDisplay() {
+  $('statScore').textContent = sessionStats.correct;
+  const acc = sessionStats.attempted > 0 
+    ? Math.round((sessionStats.correct / sessionStats.attempted) * 100) 
+    : 0;
+  $('statAccuracy').textContent = `${acc}%`;
+  $('statStreak').textContent = `🔥 ${sessionStats.streak}`;
+  $('statBest').textContent = `🏆 ${sessionStats.bestStreak}`;
+  $('bookmarkCount').textContent = bookmarks.size;
+}
+
+// Exam Completion Alert
+function showExamCompletion() {
+  const pct = Math.round((sessionStats.correct / deck.length) * 100);
+  let grade = 'A';
+  if (pct < 60) grade = 'F';
+  else if (pct < 70) grade = 'D';
+  else if (pct < 80) grade = 'C';
+  else if (pct < 90) grade = 'B';
+
+  alert(`🎯 Exam Complete!\n\nScore: ${sessionStats.correct} / ${deck.length} (${pct}%)\nGrade: ${grade}\n\nReturning to Infinite Practice Mode.`);
+  setMode('infinite');
+}
+
+// Mode & Filter Handling
+function setSource(source) {
+  activeSource = source;
+  document.querySelectorAll('.pill-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.source === source);
+  });
+  buildDeck();
+  nextQuestion();
+}
+
+function setMode(mode) {
+  activeMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === mode);
+  });
+  buildDeck();
+  nextQuestion();
+}
+
+// Mastery Drawer Render
+function openMasteryModal() {
+  const container = $('masteryList');
+  container.innerHTML = '';
+  
+  const cats = Object.keys(sessionStats.categoryMastery);
+  if (cats.length === 0) {
+    container.innerHTML = '<p style="color:var(--ink-muted); font-size:13px;">No questions answered yet. Start answering questions to see category mastery!</p>';
+  } else {
+    cats.sort().forEach(cat => {
+      const data = sessionStats.categoryMastery[cat];
+      const pct = Math.round((data.correct / data.attempted) * 100);
+      const row = document.createElement('div');
+      row.className = 'mastery-row';
+      row.innerHTML = `
+        <div class="mastery-meta">
+          <span>${cat}</span>
+          <span>${data.correct}/${data.attempted} (${pct}%)</span>
+        </div>
+        <div class="mastery-bar-bg">
+          <div class="mastery-bar-fill" style="width: ${pct}%;"></div>
+        </div>
+      `;
+      container.appendChild(row);
+    });
+  }
+
+  // Bookmarks list
+  const bList = $('bookmarkList');
+  bList.innerHTML = '';
+  if (bookmarks.size === 0) {
+    bList.innerHTML = '<p style="color:var(--ink-muted); font-size:13px;">No bookmarked questions. Click the star icon on any question to bookmark it.</p>';
+  } else {
+    Array.from(bookmarks).forEach(id => {
+      const q = BANK.find(item => item.id === id);
+      if (q) {
+        const item = document.createElement('div');
+        item.className = 'bookmarked-item';
+        item.innerHTML = `
+          <h4>${q.q}</h4>
+          <p>✓ ${q.o[q.a]}</p>
+        `;
+        bList.appendChild(item);
+      }
+    });
+  }
+
+  $('masteryModal').classList.add('open');
+}
+
+function closeMasteryModal() {
+  $('masteryModal').classList.remove('open');
+}
+
+// Event Listeners
+document.querySelectorAll('.pill-btn').forEach(btn => {
+  btn.addEventListener('click', () => setSource(btn.dataset.source));
+});
+
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => setMode(btn.dataset.mode));
+});
+
+$('catSelect').addEventListener('change', e => {
+  activeCategory = e.target.value;
+  buildDeck();
+  nextQuestion();
+});
+
+$('resetDeckBtn').addEventListener('click', () => {
+  buildDeck();
+  nextQuestion();
+});
+
+$('nextBtn').addEventListener('click', nextQuestion);
+
+$('skipBtn').addEventListener('click', () => {
+  if (!isAnswerLocked) {
+    sessionStats.attempted++;
+    sessionStats.streak = 0;
+    updateStatsDisplay();
+  }
+  nextQuestion();
+});
+
+$('starBtn').addEventListener('click', () => {
+  if (!currentQuestion) return;
+  if (bookmarks.has(currentQuestion.id)) {
+    bookmarks.delete(currentQuestion.id);
+  } else {
+    bookmarks.add(currentQuestion.id);
+  }
+  localStorage.setItem('aeroquest_bookmarks', JSON.stringify(Array.from(bookmarks)));
+  $('starBtn').textContent = bookmarks.has(currentQuestion.id) ? '★' : '☆';
+  $('starBtn').className = bookmarks.has(currentQuestion.id) ? 'btn-star starred' : 'btn-star';
+  updateStatsDisplay();
+});
+
+$('soundBtn').addEventListener('click', () => {
+  soundEnabled = !soundEnabled;
+  localStorage.setItem('aeroquest_sound', soundEnabled.toString());
+  $('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
+  $('soundTxt').textContent = soundEnabled ? 'Sound ON' : 'Sound OFF';
+  $('soundBtn').classList.toggle('active', soundEnabled);
+});
+
+$('statsBtn').addEventListener('click', openMasteryModal);
+$('closeMasteryBtn').addEventListener('click', closeMasteryModal);
+$('masteryModal').addEventListener('click', e => {
+  if (e.target === $('masteryModal')) closeMasteryModal();
+});
+
+// Keyboard Shortcuts
+window.addEventListener('keydown', e => {
+  // If typing in input/select or modal is open
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+
+  if (e.key === 'Escape') {
+    closeMasteryModal();
+    return;
+  }
+
+  if (e.key === ' ' || e.key === 'Enter') {
+    if (!$('nextBtn').disabled) {
+      e.preventDefault();
+      nextQuestion();
+    }
+  } else if (e.key === 's' || e.key === 'S') {
+    $('skipBtn').click();
+  } else if (e.key === 'b' || e.key === 'B') {
+    $('starBtn').click();
+  } else if (['1', '2', '3', '4'].includes(e.key)) {
+    const idx = parseInt(e.key, 10) - 1;
+    const btns = $('optionsGrid').children;
+    if (btns[idx] && !isAnswerLocked) btns[idx].click();
+  } else if (['a', 'b', 'c', 'd'].includes(e.key.toLowerCase())) {
+    const idx = ['a', 'b', 'c', 'd'].indexOf(e.key.toLowerCase());
+    const btns = $('optionsGrid').children;
+    if (btns[idx] && !isAnswerLocked) btns[idx].click();
+  }
+});
+
+// Initialize on load
+initCategories();
+buildDeck();
+nextQuestion();
+updateStatsDisplay();
+$('soundBtn').classList.toggle('active', soundEnabled);
+$('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
+$('soundTxt').textContent = soundEnabled ? 'Sound ON' : 'Sound OFF';
+</script>
+</body>
+</html>
