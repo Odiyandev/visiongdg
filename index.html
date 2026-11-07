@@ -39,7 +39,7 @@ h1{font-size:clamp(24px,4vw,32px);letter-spacing:-1px;margin:0 0 8px}.sub{color:
       <div class="stat"><b id="streak">0</b><span>Best streak</span></div>
     </div>
   </main>
-  <div class="footer">Questions are based on your Ground Handling presentation. The question order is randomized and repeats only after the pool has been used.</div>
+  <div class="footer">The question order is randomized and repeats only after the pool has been used.<br><span id="sourceStatus" aria-live="polite">Loading presentation questions…</span></div>
 </div>
 <script>
 const bank = [
@@ -188,7 +188,30 @@ function updateStats(){
 }
 $("next").addEventListener("click",nextQuestion);
 $("skip").addEventListener("click",()=>{if(!locked){attempts++;streak=0;updateStats();}nextQuestion();});
-newDeck();nextQuestion();
+async function loadQuestionBank(){
+  try{
+    const response=await fetch("final_questions.json");
+    if(!response.ok)throw new Error(`Question bank request failed: ${response.status}`);
+    const questions=await response.json();
+    if(!Array.isArray(questions)||questions.some(q=>!q||typeof q.c!=="string"||typeof q.q!=="string"||!Array.isArray(q.o)||q.o.length!==4||q.o.some(option=>typeof option!=="string")||!Number.isInteger(q.a)||q.a<0||q.a>=q.o.length||typeof q.e!=="string")){
+      throw new Error("The presentation question bank contains an invalid question.");
+    }
+    const existing=new Set(bank.map(q=>q.q.trim().toLowerCase()));
+    questions.forEach(q=>{
+      const key=q.q.trim().toLowerCase();
+      if(!existing.has(key)){
+        bank.push({c:q.c,q:q.q,o:q.o,a:q.a,e:q.e});
+        existing.add(key);
+      }
+    });
+    $("sourceStatus").textContent=`Loaded ${bank.length} questions from the presentation and aviation fundamentals.`;
+  }catch(error){
+    console.error("Could not load the extended question bank.",error);
+    $("sourceStatus").textContent="The extended question bank could not be loaded; using built-in questions only.";
+  }
+  newDeck();nextQuestion();
+}
+loadQuestionBank();
 </script>
 </body>
 </html>

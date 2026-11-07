@@ -3260,5 +3260,173 @@
     ],
     "a": 0,
     "e": "Potable water service trucks fill the aircraft's onboard clean drinking water tanks under strict hygiene protocols, completely separated from lavatory waste service."
+  },
+  {
+    "id": 234,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "How many letters are used in a standard IATA airport location code?",
+    "o": [
+      "Three letters, such as DXB for Dubai",
+      "Four letters, such as OMDB for Dubai",
+      "Two letters followed by three numbers",
+      "One letter followed by four numbers"
+    ],
+    "a": 0,
+    "e": "IATA airport location codes use three letters and are commonly seen on tickets and baggage tags."
+  },
+  {
+    "id": 235,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "How many letters are used in a standard ICAO airport location indicator?",
+    "o": [
+      "Four letters, such as OMDB for Dubai",
+      "Three letters, such as DXB for Dubai",
+      "Two letters followed by a flight number",
+      "A variable number of digits only"
+    ],
+    "a": 0,
+    "e": "ICAO location indicators use four letters and are commonly used in flight planning and air traffic operations."
+  },
+  {
+    "id": 236,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "Which pair correctly gives Qatar Airways' IATA and ICAO airline designators?",
+    "o": [
+      "IATA: QR; ICAO: QTR",
+      "IATA: QTR; ICAO: QR",
+      "IATA: QA; ICAO: QTA",
+      "IATA: QT; ICAO: QAR"
+    ],
+    "a": 0,
+    "e": "Airlines commonly have a two-character IATA designator and a three-letter ICAO designator; Qatar Airways uses QR and QTR."
+  },
+  {
+    "id": 237,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "What kind of information does a METAR provide?",
+    "o": [
+      "A routine observation of current weather at an aerodrome",
+      "A long-range schedule of airline ticket prices",
+      "A forecast of aircraft maintenance tasks",
+      "A list of airport baggage allowances"
+    ],
+    "a": 0,
+    "e": "A METAR is a coded report of observed weather conditions at an aerodrome."
+  },
+  {
+    "id": 238,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "What is the purpose of a TAF?",
+    "o": [
+      "To forecast weather conditions for an aerodrome over a stated period",
+      "To report the current position of every aircraft in flight",
+      "To identify an airline using a three-letter code",
+      "To record the weight of checked baggage"
+    ],
+    "a": 0,
+    "e": "A TAF is an aerodrome weather forecast issued for a defined validity period."
+  },
+  {
+    "id": 239,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "What does a NOTAM communicate to aviation personnel?",
+    "o": [
+      "Important information about changes, hazards, or restrictions affecting flight operations",
+      "A passenger's seat assignment and meal selection",
+      "The aircraft manufacturer's recommended paint colors",
+      "The final ticket price for an itinerary"
+    ],
+    "a": 0,
+    "e": "NOTAMs provide time-sensitive information relevant to flight operations, such as facility changes or hazards."
+  },
+  {
+    "id": 240,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "What does VFR mean in aviation?",
+    "o": [
+      "Visual Flight Rules",
+      "Variable Flight Route",
+      "Verified Fuel Report",
+      "Vertical Flight Rating"
+    ],
+    "a": 0,
+    "e": "VFR means Visual Flight Rules, under which pilots operate primarily with visual reference to the environment while meeting applicable rules."
+  },
+  {
+    "id": 241,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "What does IFR mean in aviation?",
+    "o": [
+      "Instrument Flight Rules",
+      "International Flight Register",
+      "In-Flight Fuel Reserve",
+      "Instrument Frequency Range"
+    ],
+    "a": 0,
+    "e": "IFR means Instrument Flight Rules, the rules used for flights conducted with instrument procedures and clearances as required."
+  },
+  {
+    "id": 242,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "Why is Coordinated Universal Time (UTC) used in aviation?",
+    "o": [
+      "It provides a common time reference for aviation operations across time zones",
+      "It measures an aircraft's speed relative to the ground",
+      "It assigns a unique number to each airport",
+      "It sets the pressure used by every aircraft altimeter"
+    ],
+    "a": 0,
+    "e": "Using UTC gives pilots, controllers, and operators a consistent time reference regardless of local time zones."
+  },
+  {
+    "id": 243,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "What does ETA mean on a flight status display?",
+    "o": [
+      "Estimated Time of Arrival",
+      "En-route Traffic Advisory",
+      "Emergency Transponder Assignment",
+      "Expected Taxiway Access"
+    ],
+    "a": 0,
+    "e": "ETA is the estimated time at which an aircraft is expected to arrive."
+  },
+  {
+    "id": 244,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "What does ETD mean on a flight status display?",
+    "o": [
+      "Estimated Time of Departure",
+      "En-route Temperature Data",
+      "Emergency Traffic Direction",
+      "Expected Terminal Distance"
+    ],
+    "a": 0,
+    "e": "ETD is the estimated time at which an aircraft is expected to depart."
+  },
+  {
+    "id": 245,
+    "c": "Aviation Codes & Abbreviations",
+    "source": "Aviation Fundamentals",
+    "q": "Which statement correctly distinguishes VFR and IFR?",
+    "o": [
+      "They are flight rules; VFR is Visual Flight Rules and IFR is Instrument Flight Rules",
+      "They are airport codes; VFR is three letters and IFR is four",
+      "They are weather reports; VFR is current weather and IFR is a forecast",
+      "They are aircraft types; VFR has fixed wings and IFR has rotor blades"
+    ],
+    "a": 0,
+    "e": "VFR and IFR describe different sets of flight rules, not aircraft types or airport weather products."
   }
 ]
