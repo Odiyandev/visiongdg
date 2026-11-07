@@ -39,7 +39,7 @@ h1{font-size:clamp(24px,4vw,32px);letter-spacing:-1px;margin:0 0 8px}.sub{color:
       <div class="stat"><b id="streak">0</b><span>Best streak</span></div>
     </div>
   </main>
-  <div class="footer">Questions are randomly generated from the PowerPoint topics. Every question is used before a new round begins.<br><span id="sourceStatus" aria-live="polite">Loading PowerPoint questions…</span></div>
+  <div class="footer">Fresh question wording is generated from PowerPoint facts. Every fact is used before a new round begins.<br><span id="sourceStatus" aria-live="polite">Loading PowerPoint questions…</span></div>
 </div>
 <script>
 const bank = [
@@ -156,26 +156,40 @@ function cleanQuestion(text){
 function questionVariants(question){
   const base=cleanQuestion(question);
   const variants=[base,`Choose the correct answer: ${base}`,`Select the best answer: ${base}`];
-  let match=base.match(/^What does (.+?) stand for\?$/i);
-  if(match)variants.push(`Which option gives the full form of ${match[1]}?`);
+  let match=base.match(/^What is the definition of (.+)\?$/i);
+  if(match)variants.push(`How is ${match[1]} defined?`,`Which option best defines ${match[1]}?`);
+  match=base.match(/^What does (.+?) stand for\?$/i);
+  if(match)variants.push(`Which option gives the full form of ${match[1]}?`,`Select the correct expansion of ${match[1]}.`);
   match=base.match(/^What is the full form of (.+)\?$/i);
-  if(match)variants.push(`What does ${match[1]} stand for?`);
+  if(match)variants.push(`What does ${match[1]} stand for?`,`Choose the correct expansion for ${match[1]}.`);
   match=base.match(/^What is the (?:main )?function of (.+)\?$/i);
-  if(match)variants.push(`What does ${match[1]} do?`);
+  if(match)variants.push(`What does ${match[1]} do?`,`Which option describes the role of ${match[1]}?`);
   match=base.match(/^What is the purpose of (.+)\?$/i);
-  if(match)variants.push(`Why is ${match[1]} used?`);
+  if(match)variants.push(`Why is ${match[1]} used?`,`Which option describes why ${match[1]} is used?`);
+  match=base.match(/^What is (.+)\?$/i);
+  if(match)variants.push(`Which statement best describes ${match[1]}?`,`Choose the correct description of ${match[1]}.`);
+  match=base.match(/^What does (.+?) mean\?$/i);
+  if(match)variants.push(`Which option best explains ${match[1]}?`,`Choose the meaning of ${match[1]}.`);
+  match=base.match(/^How (.+)\?$/i);
+  if(match)variants.push(`Which option best explains how ${match[1]}?`);
+  match=base.match(/^In which year (.+)\?$/i);
+  if(match)variants.push(`What year did ${match[1]}?`);
   return [...new Set(variants)];
 }
 function cleanExplanation(question){
   if(/\b(?:presentation|slide\s+\d+)\b/i.test(question.e))return `The correct answer is ${question.o[question.a]}.`;
   return question.e;
 }
+const lastQuestionVariant=new Map();
 function newDeck(){
-  deck=shuffle(bank.map(question=>({
-    ...question,
-    q:shuffle(questionVariants(question.q))[0],
-    e:cleanExplanation(question)
-  })));
+  deck=shuffle(bank.map(question=>{
+    const variants=questionVariants(question.q);
+    const previous=lastQuestionVariant.get(question.q);
+    const freshVariants=variants.filter(variant=>variant!==previous);
+    const q=shuffle(freshVariants.length?freshVariants:variants)[0];
+    lastQuestionVariant.set(question.q,q);
+    return {...question,q,e:cleanExplanation(question)};
+  }));
   index=0;
 }
 function nextQuestion(){
@@ -252,7 +266,7 @@ async function loadQuestionBank(){
         existing.add(key);
       }
     });
-    $("sourceStatus").textContent=`Ready: ${bank.length} PowerPoint questions. Questions and answer choices are randomized each round.`;
+    $("sourceStatus").textContent=`Ready: ${bank.length} PowerPoint facts. New question wording and answer order are generated each round.`;
   }catch(error){
     console.error("Could not load PowerPoint questions.",error);
     $("sourceStatus").textContent="Could not load the PowerPoint questions. Open this page through the project server and try again.";
