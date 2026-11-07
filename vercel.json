@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/ground_handling_infinite_mcq_exam.html"
+    }
+  ]
+}

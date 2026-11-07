@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ground Handling – Infinite MCQ Exam</title>
+<style>
+:root{--bg:#f3f6f4;--card:#fff;--ink:#17231d;--muted:#68766e;--green:#167447;--green2:#e7f5ed;--line:#e1e9e3;--red:#b93838;--redbg:#fff0f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh;display:flex;justify-content:center;padding:24px}
+.wrap{width:min(760px,100%)}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 20px}.brand{font-weight:800;letter-spacing:-.4px;font-size:18px}.tag{font-size:12px;color:var(--green);background:var(--green2);padding:7px 11px;border-radius:99px;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,34px);box-shadow:0 12px 40px rgba(20,55,35,.06)}
+.meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px;font-weight:650}.progress{height:7px;background:#edf1ee;border-radius:99px;margin:14px 0 27px;overflow:hidden}.bar{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .25s}
+h1{font-size:clamp(24px,4vw,32px);letter-spacing:-1px;margin:0 0 8px}.sub{color:var(--muted);font-size:14px;margin-bottom:24px}.question{font-size:clamp(19px,3vw,23px);line-height:1.4;font-weight:750;margin:0 0 22px}
+.options{display:grid;gap:11px}.option{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:15px 16px;text-align:left;display:flex;align-items:center;gap:13px;font-size:15px;color:var(--ink);cursor:pointer;transition:.15s}.option:hover:not(:disabled){border-color:#8dbba1;background:#f8fcf9;transform:translateY(-1px)}.letter{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:#f0f4f1;color:#526259;font-size:13px;font-weight:800;flex:none}.option.correct{border-color:var(--green);background:var(--green2)}.option.correct .letter{background:var(--green);color:white}.option.wrong{border-color:var(--red);background:var(--redbg)}.option.wrong .letter{background:var(--red);color:white}.option:disabled{cursor:default}
+.feedback{display:none;margin-top:18px;border-radius:13px;padding:14px 16px;font-size:14px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:var(--green2);color:#145c39}.feedback.bad{background:var(--redbg);color:#8f2828}.feedback strong{display:block;margin-bottom:4px}
+.actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}.btn{border:0;border-radius:12px;padding:13px 19px;font-weight:750;font-size:14px;cursor:pointer}.primary{background:var(--green);color:white}.primary:hover{background:#105f39}.secondary{background:#edf2ee;color:#34443a}.btn:disabled{opacity:.45;cursor:not-allowed}.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.stat{background:#f7faf8;border:1px solid var(--line);border-radius:12px;padding:10px 13px;min-width:105px}.stat b{display:block;font-size:20px}.stat span{font-size:11px;color:var(--muted);font-weight:650;text-transform:uppercase;letter-spacing:.5px}
+.footer{text-align:center;color:var(--muted);font-size:12px;margin:16px 0 6px}.hidden{display:none!important}
+@media(max-width:520px){body{padding:12px}.top{margin-top:4px}.card{border-radius:18px}.actions{align-items:stretch}.actions .btn{flex:1}.meta{font-size:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand">✈ Ground Handling Exam</div><div class="tag">INFINITE PRACTICE</div></div>
+  <main class="card">
+    <div class="meta"><span id="category">AVIATION BASICS</span><span id="counter">Question 1</span></div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <h1>Practice Exam</h1>
+    <div class="sub">Choose an answer. Your result appears instantly, then continue to the next random question.</div>
+    <p class="question" id="question">Loading question…</p>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+    <div class="actions">
+      <button class="btn secondary" id="skip">Skip question</button>
+      <button class="btn primary" id="next" disabled>Next question →</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="score">0</b><span>Correct</span></div>
+      <div class="stat"><b id="attempts">0</b><span>Attempted</span></div>
+      <div class="stat"><b id="streak">0</b><span>Best streak</span></div>
+    </div>
+  </main>
+  <div class="footer">Questions are based on your Ground Handling presentation. The question order is randomized and repeats only after the pool has been used.</div>
+</div>
+<script>
+const bank = [
+{c:"Aviation Basics",q:"What does the term aviation mean?",o:["The art or science of flying","The study of sea transportation","The operation of road vehicles","The science of railway systems"],a:0,e:"The presentation defines aviation as the art or science of flying."},
+{c:"Aviation Basics",q:"Which description best defines an airport in the presentation?",o:["A land aerodrome with facilities for passengers, baggage and cargo","A building used only for aircraft maintenance","A place used only by military aircraft","A facility used only for air traffic control"],a:0,e:"An airport is a land aerodrome with extended facilities for transporting passengers, baggage and cargo."},
+{c:"Aviation Basics",q:"Which of these is listed as a type of airport?",o:["STOL airport","Railway airport","Submarine airport","Highway airport"],a:0,e:"STOL means Short Take-Off and Landing; STOL airports are listed in the presentation."},
+{c:"Aviation Basics",q:"What is an aircraft?",o:["A machine capable of flying through the air","A vehicle designed only for roads","A ship designed for water travel","A machine used only inside hangars"],a:0,e:"The presentation describes an aircraft as a machine or vehicle capable of flying through the air."},
+{c:"Aircraft Parts",q:"What is the main body of an aircraft called?",o:["Fuselage","Empennage","Aileron","Apron"],a:0,e:"The fuselage is the main body and holds passengers, cargo and crew."},
+{c:"Aircraft Parts",q:"What is the main function of aircraft wings?",o:["Provide lift","Provide cabin lighting","Store passenger luggage","Control cabin temperature"],a:0,e:"Air flowing over the wings creates lift, helping the aircraft stay in the air."},
+{c:"Aircraft Parts",q:"Where do pilots control the aircraft?",o:["Cockpit or flight deck","Cargo compartment","Passenger galley","Landing gear bay"],a:0,e:"The cockpit, also called the flight deck, contains flight controls, instruments and navigation systems."},
+{c:"Aircraft Parts",q:"Which aircraft part supports the aircraft during takeoff and landing?",o:["Landing gear","Rudder","Flaps","Fuselage"],a:0,e:"Landing gear supports the aircraft on the ground and absorbs shock during landing."},
+{c:"Aircraft Parts",q:"What do aircraft engines provide?",o:["Thrust","Baggage capacity","Passenger seating","Lift directly from the tail"],a:0,e:"Engines provide thrust to move the aircraft forward."},
+{c:"Aircraft Parts",q:"Which control surface controls roll?",o:["Ailerons","Elevators","Rudder","Flaps"],a:0,e:"Ailerons on the wings control rolling left or right."},
+{c:"Aircraft Parts",q:"Which control surface controls pitch?",o:["Elevators","Rudder","Ailerons","Slats"],a:0,e:"Elevators on the tail control the aircraft's climbing or descending tilt (pitch)."},
+{c:"Aircraft Parts",q:"Which control surface controls yaw?",o:["Rudder","Ailerons","Elevators","Flaps"],a:0,e:"The rudder on the vertical tail controls left/right direction (yaw)."},
+{c:"Aircraft Parts",q:"What is the function of flaps and slats?",o:["Increase lift at low speeds","Reduce passenger capacity","Control the landing gear","Provide engine thrust"],a:0,e:"Flaps and slats help during takeoff and landing by increasing lift at low speeds."},
+{c:"Aircraft Types",q:"Which aircraft layout has a single aisle?",o:["Narrow-body","Wide-body","Twin-rotor","Dedicated freighter"],a:0,e:"Narrow-body aircraft are single-aisle aircraft, such as the Boeing 737 and Airbus A320."},
+{c:"Aircraft Types",q:"Which aircraft layout usually has two aisles?",o:["Wide-body","Narrow-body","Light aircraft","Regional turboprop only"],a:0,e:"Wide-body aircraft have twin aisles and larger passenger and cargo capacity."},
+{c:"Aircraft Types",q:"Which manufacturer is based in Brazil according to the presentation?",o:["Embraer","Boeing","Airbus","Bombardier"],a:0,e:"The presentation lists Embraer as a Brazilian aircraft manufacturer."},
+{c:"Aircraft Types",q:"What are regional jets mainly used for?",o:["Short regional routes with fewer passengers","Long-haul cargo-only routes","Military combat missions","Vertical takeoff and hovering"],a:0,e:"Regional jets such as the Embraer E190 operate on short regional routes."},
+{c:"Aircraft Types",q:"What does P2F mean in cargo aviation?",o:["Passenger to Freighter","Pilot to Flight","Plane to Fuel","Passenger to First class"],a:0,e:"P2F refers to passenger aircraft converted for freighter operations."},
+{c:"Aircraft Types",q:"Which aircraft type can hover and take off vertically?",o:["Helicopter","Narrow-body jet","Wide-body jet","Glider"],a:0,e:"Helicopters are rotary-wing aircraft used for vertical takeoff, landing and hovering."},
+{c:"Airports",q:"What are the three main areas of an airport listed in the presentation?",o:["Landside, terminal and airside","Runway, hangar and control room","Check-in, galley and cockpit","Cargo, hotel and parking"],a:0,e:"The three main airport areas are landside, terminal and airside."},
+{c:"Airports",q:"Which airport area is described as unrestricted?",o:["Landside","Airside","Runway","Apron"],a:0,e:"Landside is the unrestricted area accessible to travelling and non-travelling people."},
+{c:"Airports",q:"What is the main purpose of an airport terminal building?",o:["Processing passengers, baggage and cargo","Parking aircraft overnight only","Controlling aircraft in flight","Manufacturing aircraft parts"],a:0,e:"The terminal is where passengers, baggage and cargo are processed between surface and air transport."},
+{c:"Airports",q:"Which area is the secured, restricted movement area of an airport?",o:["Airside","Landside","Public car park","Ticket office"],a:0,e:"Airside is the secured and restricted area where aircraft operations take place."},
+{c:"Airports",q:"Which of these is an airside facility?",o:["Taxiway","Public shopping street","Hotel lobby","Railway platform"],a:0,e:"Taxiways are part of the airside area, along with runways, aprons and stands."},
+{c:"Authorities",q:"What is the full form of ICAO?",o:["International Civil Aviation Organization","International Cargo Airline Office","Indian Civil Airport Organization","International Cabin Aviation Office"],a:0,e:"ICAO stands for International Civil Aviation Organization."},
+{c:"Authorities",q:"What is the full form of IATA?",o:["International Air Transport Association","International Airport Travel Office","Indian Air Transport Authority","International Aircraft Technical Association"],a:0,e:"IATA stands for International Air Transport Association."},
+{c:"Authorities",q:"In which year was ICAO founded, according to the presentation?",o:["1945","1919","1991","2001"],a:0,e:"The presentation gives 1945 as ICAO's foundation year."},
+{c:"Authorities",q:"What is the main activity area of IATA described in the presentation?",o:["Commercial","Military","Agricultural","Airport construction"],a:0,e:"The presentation identifies IATA's activity area as commercial."},
+{c:"Authorities",q:"What does ACI stand for?",o:["Airports Council International","Airline Control Institute","Aviation Cargo International","Airport Customs Inspection"],a:0,e:"ACI stands for Airports Council International."},
+{c:"Authorities",q:"What is a National Aviation Authority (NAA)?",o:["A government body regulating civil aviation in a country","A private airline ticketing company","An aircraft manufacturer","A passenger assistance association"],a:0,e:"An NAA oversees and regulates civil aviation within a specific country."},
+{c:"Ground Handling",q:"What is ground handling?",o:["Services supporting aircraft and passengers while the aircraft is on the ground","The process of designing aircraft wings","The process of flying an aircraft","The construction of airport runways"],a:0,e:"Ground handling supports aircraft and passengers on the ground, especially between flights."},
+{c:"Ground Handling",q:"Which is a main component of ground handling?",o:["Passenger services","Aircraft manufacturing","Pilot recruitment","Airline advertising"],a:0,e:"Passenger services are one of the main components of ground handling."},
+{c:"Ground Handling",q:"Which company is given as an example of a ground handling provider?",o:["Swissport","Airbus","Embraer","ICAO"],a:0,e:"Swissport is listed as an example of a third-party ground handling provider."},
+{c:"Ground Handling",q:"Why are efficient ground handling services important?",o:["They support on-time performance and safe aircraft turnaround","They replace air traffic control","They remove the need for flight crew","They manufacture aircraft"],a:0,e:"Ground handling supports punctuality, safety, passenger experience and efficient turnaround."},
+{c:"Reservations",q:"What is a reservation in aviation?",o:["Booking a seat for a particular date, time and route","Issuing a baggage tag","Checking a passenger's visa at arrival","Loading cargo into an aircraft"],a:0,e:"A reservation is the process of booking an aircraft seat for a specific journey."},
+{c:"Reservations",q:"What is ticketing?",o:["Issuing a travel document confirming a booking","Assigning a runway to an aircraft","Weighing checked baggage","Screening cargo"],a:0,e:"Ticketing issues the travel document that confirms the booking and authorizes travel."},
+{c:"Reservations",q:"Which is a channel for reservation and ticketing?",o:["Global Distribution System (GDS)","Aircraft pushback tractor","Belt loader","Runway lighting"],a:0,e:"GDS is listed as one of the reservation and ticketing channels."},
+{c:"Reservations",q:"Which step comes after payment in the reservation system workflow?",o:["Issuance of e-ticket","Aircraft pushback","Baggage unloading","Immigration interview"],a:0,e:"The workflow includes flight search, selection and booking, fare calculation, payment and e-ticket issuance."},
+{c:"Passenger Handling",q:"Which task is performed by check-in staff?",o:["Verifying travel documents","Controlling aircraft engines","Issuing pilot licences","Directing aircraft in flight"],a:0,e:"Check-in staff greet passengers and verify their travel documents."},
+{c:"Passenger Handling",q:"What is usually issued to a passenger during check-in?",o:["Boarding pass","Air Waybill","Cargo manifest","Load control licence"],a:0,e:"Check-in staff check in passengers and issue boarding passes."},
+{c:"Passenger Handling",q:"What do check-in staff do with checked baggage?",o:["Weigh, tag and send it to the sorting system","Place it in the cockpit","Give it directly to the pilot","Send it through immigration"],a:0,e:"The presentation lists weighing, tagging and sending checked baggage to the sorting system."},
+{c:"Passenger Handling",q:"Which is a challenge during check-in?",o:["Handling excess baggage","Designing aircraft engines","Repairing airport runways","Issuing pilot licences"],a:0,e:"Excess baggage and invalid documents are among the challenges faced by check-in staff."},
+{c:"Passenger Handling",q:"What is the purpose of pre-boarding activities?",o:["Prepare for a smooth, safe and efficient boarding process","Unload cargo after arrival","Perform aircraft manufacturing","Issue visas to passengers"],a:0,e:"Pre-boarding includes gate preparation, document checks, announcements and coordination."},
+{c:"Passenger Handling",q:"Which activity is part of boarding procedures?",o:["Passenger verification","Aircraft painting","Cargo booking for another flight","Pilot medical examination"],a:0,e:"Passenger verification is one of the listed boarding procedure steps."},
+{c:"Passenger Handling",q:"Which is a common challenge during boarding?",o:["Overhead bin space becoming full","Aircraft design changes","Airport construction permits","Pilot recruitment"],a:0,e:"The presentation lists full overhead bin space as a boarding challenge."},
+{c:"Passenger Handling",q:"What is arrival handling?",o:["Managing passengers and baggage from landing until passengers exit the airport","Booking seats before departure","Preparing an aircraft for manufacturing","Issuing airline staff uniforms"],a:0,e:"Arrival handling covers the process from aircraft landing until passengers leave the airport."},
+{c:"Special Passengers",q:"What does PRM stand for?",o:["Persons with Reduced Mobility","Passenger Ramp Manager","Priority Reservation Member","Passenger Route Map"],a:0,e:"PRM means Persons with Reduced Mobility."},
+{c:"Special Passengers",q:"What does UMNR refer to?",o:["Unaccompanied Minors","Unclaimed Missing Reservations","Urgent Medical Needs Record","United Member Number"],a:0,e:"UMNR refers to unaccompanied minors who require assistance while travelling."},
+{c:"Special Passengers",q:"Which code is used for a stretcher case in the presentation?",o:["STCR","OXYG","DEPA","WCHR"],a:0,e:"STCR is the code for a stretcher case."},
+{c:"Special Passengers",q:"Which code indicates oxygen is required?",o:["OXYG","MEDA","DEPU","WCHS"],a:0,e:"OXYG indicates that oxygen is required."},
+{c:"Special Passengers",q:"What does DEPU mean?",o:["Deportee – Unaccompanied","Deportee – Accompanied","Departure – Unconfirmed","Denied Entry – Priority"],a:0,e:"DEPU means a deportee travelling without an escort."},
+{c:"Special Passengers",q:"What is an inadmissible passenger (INAD)?",o:["A traveller refused entry by immigration authorities","A passenger travelling without checked baggage","A passenger with a confirmed seat","A passenger requiring wheelchair assistance"],a:0,e:"An INAD passenger has been refused entry into a country by immigration authorities."},
+{c:"Special Passengers",q:"Which may be a reason for INAD status?",o:["Invalid or missing visa","Having a window seat","Travelling with hand baggage","Checking in online"],a:0,e:"An invalid or missing visa is one of the common reasons listed for INAD status."},
+{c:"Check-in",q:"Which of these is a type of check-in?",o:["Self check-in","Engine check-in","Runway check-in","Cabin crew check-in"],a:0,e:"Self check-in is one of the check-in types listed in the presentation."},
+{c:"Check-in",q:"What is through check-in?",o:["A listed type of check-in for a passenger journey","A method of aircraft refuelling","A cargo screening machine","A type of aircraft stand"],a:0,e:"Through check-in is included in the presentation's list of check-in types."},
+{c:"Passenger Types",q:"Which passenger category is based on class of service?",o:["Economy Class","No-show","Go-show","Standby"],a:0,e:"Economy Class is one of the service classes listed, alongside First, Business and Premium Economy."},
+{c:"Passenger Types",q:"What is a no-show passenger?",o:["A passenger who does not show up for the booked flight","A passenger who arrives early","A passenger travelling with no baggage","A passenger who changes seats"],a:0,e:"The presentation lists no-show passengers under booking and check-in status."},
+{c:"Baggage",q:"What are the two primary baggage allowance systems mentioned?",o:["Weight concept and piece concept","Cabin concept and cargo concept","Manual concept and online concept","Arrival concept and departure concept"],a:0,e:"The presentation explains baggage acceptance through the weight concept and piece concept."},
+{c:"Baggage",q:"What is the weight concept?",o:["Allowance based on total baggage weight","Allowance based only on the number of bags","Allowance based on passenger age","Allowance based on flight duration"],a:0,e:"Under the weight concept, the total permitted weight matters regardless of the number of bags."},
+{c:"Baggage",q:"What is the piece concept?",o:["Allowance based on a permitted number of bags, each with limits","Allowance based only on total passenger weight","Allowance based on the number of passengers","Allowance based on the aircraft's age"],a:0,e:"The piece concept specifies a number of bags, with weight and size restrictions for each."},
+{c:"Baggage",q:"What is the typical maximum single checked-bag weight mentioned in the presentation?",o:["32 kg","12 kg","18 kg","45 kg"],a:0,e:"The presentation mentions 32 kg (70 lbs) as a typical maximum for one checked bag, though airlines may set lower limits."},
+{c:"Baggage",q:"What does CBBG stand for?",o:["Cabin Seat Baggage","Checked Baggage Group","Cargo Booking Guide","Cabin Boarding Gate"],a:0,e:"CBBG means Cabin Seat Baggage, which may include items such as musical instruments or valuable equipment."},
+{c:"Baggage",q:"Which item is given as an example of Cabin Seat Baggage?",o:["Musical instrument","Ordinary checked suitcase","Aircraft tyre","Fuel container"],a:0,e:"Musical instruments are among the examples of CBBG in the presentation."},
+{c:"Baggage",q:"Which baggage tag is listed in the presentation?",o:["Priority tag","Pilot tag","Runway tag","Engine tag"],a:0,e:"Priority tags are included in the presentation's list of baggage tags."},
+{c:"Baggage",q:"Which security question should staff ask when accepting a bag?",o:["Have you packed your bag?","Did you build this aircraft?","Do you know the pilot?","Have you visited this airport before?"],a:0,e:"The presentation includes asking passengers whether they packed their own bag."},
+{c:"Airside & Ramp",q:"What does airside operations cover?",o:["Activities in the secure area including runways, taxiways and aprons","Only public transport outside the airport","Only airline ticket sales","Only passenger shopping areas"],a:0,e:"Airside operations take place in the secure aircraft movement areas of the airport."},
+{c:"Airside & Ramp",q:"What is ramp operation concerned with?",o:["Activities around aircraft on the ground","Passenger hotel reservations","Aircraft manufacturing","Visa application processing"],a:0,e:"Ramp operations include parking, loading, refuelling, servicing and pushback."},
+{c:"Airside & Ramp",q:"What is pushback?",o:["Moving an aircraft back from the gate using a tug or tractor","Moving baggage onto a carousel","Pushing passengers through security","Moving cargo into a warehouse"],a:0,e:"After servicing and boarding, a tug or tractor pushes the aircraft back from the gate."},
+{c:"Airside & Ramp",q:"Which equipment is used to move an aircraft during pushback?",o:["Pushback tractor","Baggage scale","X-ray machine","Passenger bridge"],a:0,e:"A tug or pushback tractor is used to push the aircraft away from the gate."},
+{c:"Airside & Ramp",q:"What does PPE stand for in ramp safety?",o:["Personal Protective Equipment","Passenger Processing Entry","Plane Parking Equipment","Pilot Protection Examination"],a:0,e:"PPE is listed among key safety protocols for ramp operations."},
+{c:"Airside & Ramp",q:"What does FOD refer to in ramp safety?",o:["Foreign Object Debris","Flight Operations Data","Fuel Order Document","Final Operations Duty"],a:0,e:"FOD means Foreign Object Debris, which can damage aircraft or engines."},
+{c:"Airside & Ramp",q:"Why are efficient ramp operations important?",o:["They reduce aircraft turnaround time","They eliminate the need for runways","They replace passenger check-in","They remove all flight delays"],a:0,e:"Efficient ramp operations reduce turnaround time and support punctuality and aircraft utilization."},
+{c:"Cargo",q:"What does AWB stand for?",o:["Air Waybill","Airport Weight Balance","Aircraft Work Book","Airline Waiting Bay"],a:0,e:"An Air Waybill is a cargo transport document."},
+{c:"Cargo",q:"Which document is included in cargo documentation?",o:["Cargo manifest","Passenger boarding pass","Pilot licence","Cabin crew roster"],a:0,e:"Cargo documentation can include Air Waybills, cargo manifests and customs declarations."},
+{c:"Cargo",q:"What may be used to screen cargo for security?",o:["X-ray screening","Seat selection system","Boarding gate display","Cabin interphone"],a:0,e:"Cargo may be screened using security methods such as X-ray screening."},
+{c:"Cargo",q:"How can cargo be tracked through an airport?",o:["Barcode scanners or RFID tags","Cabin seat numbers","Passenger passport stamps","Runway markings"],a:0,e:"The presentation mentions barcode scanners and RFID tags for cargo tracking."},
+{c:"Cargo",q:"Which is listed as a special cargo type?",o:["Perishable cargo","Passenger cabin crew","Airport signage","Aircraft seating"],a:0,e:"Perishable cargo, dangerous goods and live animals are listed as special cargo types."},
+{c:"Cargo",q:"What does DGR refer to in the presentation?",o:["IATA Dangerous Goods Regulations","Departure Gate Record","Domestic Ground Route","Daily General Report"],a:0,e:"DGR refers to IATA's Dangerous Goods Regulations."},
+{c:"Security",q:"What is the purpose of aviation security?",o:["Safeguarding civil aviation against acts of unlawful interference","Increasing aircraft speed","Managing airline ticket prices","Improving aircraft cabin entertainment"],a:0,e:"The presentation defines aviation security as safeguarding civil aviation against unlawful interference."},
+{c:"Security",q:"Which is a key aspect of ground handling security?",o:["Access control","Seat upgrades","Meal selection","Frequent flyer points"],a:0,e:"Access control is one of the listed aspects of security operations."},
+{c:"Security",q:"Which item is included in security operations?",o:["Passenger screening","Aircraft advertising","Hotel check-in","Ticket refund processing"],a:0,e:"Passenger screening is one of the key aspects of security operations."},
+{c:"Careers",q:"Which is a career area in ground operations?",o:["Passenger services","Ship navigation","Railway signalling","Road construction"],a:0,e:"Passenger services is one of the career areas listed in the presentation."},
+{c:"Careers",q:"Which skill group is mentioned for ground operations candidates?",o:["Customer service skills","Marine engineering skills","Road racing skills","Hotel cooking skills"],a:0,e:"The presentation lists customer service, soft skills and technical skills."},
+{c:"Industry Trends",q:"Which technology trend is mentioned in the aviation industry section?",o:["Artificial intelligence and machine learning","Steam railway engines","Underwater navigation","Coal-powered aircraft"],a:0,e:"The presentation mentions AI and machine learning alongside autonomous aircraft and drones."},
+{c:"Industry Trends",q:"Which sustainability trend is mentioned?",o:["Sustainable aviation fuels","Increasing carbon emissions","Replacing airports with seaports","Removing all regional flights"],a:0,e:"The presentation mentions green aviation, sustainable fuels and carbon-emission reduction."}
+];
+
+let deck=[], index=0, current=null, locked=false, score=0, attempts=0, streak=0, best=0;
+const $=id=>document.getElementById(id);
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function newDeck(){deck=shuffle([...bank.keys()]);index=0;}
+function nextQuestion(){
+  if(index>=deck.length)newDeck();
+  current=bank[deck[index++]];
+  locked=false;
+  $("category").textContent=current.c.toUpperCase();
+  $("counter").textContent=`Question ${attempts+1}`;
+  $("bar").style.width=`${Math.round(((index)/deck.length)*100)}%`;
+  $("question").textContent=current.q;
+  $("feedback").className="feedback";
+  $("feedback").innerHTML="";
+  $("next").disabled=true;
+  $("next").textContent="Next question →";
+  $("options").innerHTML="";
+  const correctText=current.o[current.a];
+  const choices=shuffle(current.o.map((t,i)=>({text:t,correct:i===current.a})));
+  choices.forEach((choice,i)=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.innerHTML=`<span class="letter">${"ABCD"[i]}</span><span>${choice.text}</span>`;
+    b.addEventListener("click",()=>choose(b,choice,correctText));
+    $("options").appendChild(b);
+  });
+  updateStats();
+}
+function choose(button,choice,correctText){
+  if(locked)return;
+  locked=true;attempts++;
+  const buttons=[...$("options").children];
+  buttons.forEach((b,i)=>{
+    b.disabled=true;
+    const label=b.querySelector("span:last-child").textContent;
+    if(label===correctText)b.classList.add("correct");
+  });
+  const fb=$("feedback");
+  if(choice.correct){
+    score++;streak++;best=Math.max(best,streak);
+    fb.className="feedback show good";
+    fb.innerHTML=`<strong>✓ Correct answer!</strong>${current.e}`;
+  }else{
+    streak=0;
+    fb.className="feedback show bad";
+    fb.innerHTML=`<strong>✕ Not quite.</strong>Correct answer: <b>${correctText}</b><br>${current.e}`;
+    button.classList.add("wrong");
+  }
+  $("next").disabled=false;
+  updateStats();
+}
+function updateStats(){
+  $("score").textContent=score;
+  $("attempts").textContent=attempts;
+  $("streak").textContent=best;
+}
+$("next").addEventListener("click",nextQuestion);
+$("skip").addEventListener("click",()=>{if(!locked){attempts++;streak=0;updateStats();}nextQuestion();});
+newDeck();nextQuestion();
+</script>
+</body>
+</html>
