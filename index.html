@@ -39,7 +39,7 @@ h1{font-size:clamp(24px,4vw,32px);letter-spacing:-1px;margin:0 0 8px}.sub{color:
       <div class="stat"><b id="streak">0</b><span>Best streak</span></div>
     </div>
   </main>
-  <div class="footer">The question order is randomized and repeats only after the pool has been used.<br><span id="sourceStatus" aria-live="polite">Loading presentation questions…</span></div>
+  <div class="footer">Questions are randomly generated from the PowerPoint topics. Every question is used before a new round begins.<br><span id="sourceStatus" aria-live="polite">Loading PowerPoint questions…</span></div>
 </div>
 <script>
 const bank = [
@@ -130,13 +130,58 @@ const bank = [
 {c:"Industry Trends",q:"Which sustainability trend is mentioned?",o:["Sustainable aviation fuels","Increasing carbon emissions","Replacing airports with seaports","Removing all regional flights"],a:0,e:"The presentation mentions green aviation, sustainable fuels and carbon-emission reduction."}
 ];
 
+bank.length=0;
 let deck=[], index=0, current=null, locked=false, score=0, attempts=0, streak=0, best=0;
 const $=id=>document.getElementById(id);
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function newDeck(){deck=shuffle([...bank.keys()]);index=0;}
+function cleanQuestion(text){
+  const cleaned=text
+    .replace(/^How does the Ground Handling presentation define (?:the term )?(.+)\?$/i,"What is the definition of $1?")
+    .replace(/^How does the presentation define (.+)\?$/i,"What does $1 mean?")
+    .replace(/^According to Slide\s+\d+,?\s*/i,"")
+    .replace(/^What (.+?) are (?:specifically )?(?:cited|listed|mentioned|highlighted|identified|included) as (.+?) in the presentation\?$/i,"Name $1 that are $2.")
+    .replace(/^What (.+?) are (?:specifically )?(?:cited|listed|mentioned|highlighted|identified|included) in the presentation\?$/i,"Name $1.")
+    .replace(/^Which (.+?) are (?:specifically )?(?:cited|listed|mentioned|highlighted|identified|included)(?: as .+?)? in the presentation\?$/i,"Name the $1.")
+    .replace(/\baccording to (?:the )?(?:Ground Handling )?presentation,?\s*/gi,"")
+    .replace(/\s+(?:according to|as described in|as stated in|as explained in|as noted in|as shown in)\s+(?:the )?presentation\??/gi,"")
+    .replace(/\s+(?:described|stated|explained|noted|shown|listed|mentioned|highlighted|cited|identified)\s+in the presentation\??/gi,"")
+    .replace(/\s+in the presentation\??/gi,"")
+    .replace(/\s+(?:according to|as described in|as stated in|as explained in|as noted in|as shown in)\s+Slide\s+\d+\??/gi,"")
+    .replace(/\s+(?:explicitly )?listed as a type of airport in the presentation\??/i," a type of airport?")
+    .replace(/\s+(?:specifically )?(?:highlighted|listed|mentioned|cited|identified|included)\s+in the presentation\??/gi,"")
+    .replace(/\s+(?:on|in) Slide\s+\d+\??/gi,"")
+    .replace(/\s+/g," ").replace(/\s+\?/g,"?").trim();
+  return cleaned.charAt(0).toUpperCase()+cleaned.slice(1);
+}
+function questionVariants(question){
+  const base=cleanQuestion(question);
+  const variants=[base,`Choose the correct answer: ${base}`,`Select the best answer: ${base}`];
+  let match=base.match(/^What does (.+?) stand for\?$/i);
+  if(match)variants.push(`Which option gives the full form of ${match[1]}?`);
+  match=base.match(/^What is the full form of (.+)\?$/i);
+  if(match)variants.push(`What does ${match[1]} stand for?`);
+  match=base.match(/^What is the (?:main )?function of (.+)\?$/i);
+  if(match)variants.push(`What does ${match[1]} do?`);
+  match=base.match(/^What is the purpose of (.+)\?$/i);
+  if(match)variants.push(`Why is ${match[1]} used?`);
+  return [...new Set(variants)];
+}
+function cleanExplanation(question){
+  if(/\b(?:presentation|slide\s+\d+)\b/i.test(question.e))return `The correct answer is ${question.o[question.a]}.`;
+  return question.e;
+}
+function newDeck(){
+  deck=shuffle(bank.map(question=>({
+    ...question,
+    q:shuffle(questionVariants(question.q))[0],
+    e:cleanExplanation(question)
+  })));
+  index=0;
+}
 function nextQuestion(){
+  if(!bank.length)return;
   if(index>=deck.length)newDeck();
-  current=bank[deck[index++]];
+  current=deck[index++];
   locked=false;
   $("category").textContent=current.c.toUpperCase();
   $("counter").textContent=`Question ${attempts+1}`;
@@ -199,18 +244,22 @@ async function loadQuestionBank(){
     if(pptQuestions.some(q=>typeof q.c!=="string"||typeof q.q!=="string"||!Array.isArray(q.o)||q.o.length!==4||q.o.some(option=>typeof option!=="string")||!Number.isInteger(q.a)||q.a<0||q.a>=q.o.length||typeof q.e!=="string")){
       throw new Error("The presentation question bank contains an invalid question.");
     }
-    const existing=new Set(bank.map(q=>q.q.trim().toLowerCase()));
+    const existing=new Set();
     pptQuestions.forEach(q=>{
       const key=q.q.trim().toLowerCase();
       if(!existing.has(key)){
-        bank.push({c:q.c,q:q.q,o:q.o,a:q.a,e:q.e});
+        bank.push({c:q.c,q:cleanQuestion(q.q),o:q.o,a:q.a,e:q.e});
         existing.add(key);
       }
     });
-    $("sourceStatus").textContent=`Loaded ${bank.length} questions from the Ground Handling presentation.`;
+    $("sourceStatus").textContent=`Ready: ${bank.length} PowerPoint questions. Questions and answer choices are randomized each round.`;
   }catch(error){
-    console.error("Could not load the extended question bank.",error);
-    $("sourceStatus").textContent="The extended question bank could not be loaded; using built-in questions only.";
+    console.error("Could not load PowerPoint questions.",error);
+    $("sourceStatus").textContent="Could not load the PowerPoint questions. Open this page through the project server and try again.";
+    $("question").textContent="PowerPoint questions could not be loaded.";
+    $("next").disabled=true;
+    $("skip").disabled=true;
+    return;
   }
   newDeck();nextQuestion();
 }
